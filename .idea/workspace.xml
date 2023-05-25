@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="empty">
-      <change afterPath="$PROJECT_DIR$/src/SortArray.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test1.txt" afterDir="false" />
+    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="SortArray class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +65,20 @@
       <option name="project" value="LOCAL" />
       <updated>1684954560328</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="SortArray class">
+      <created>1684956508389</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684956508389</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="empty" />
+    <MESSAGE value="SortArray class" />
+    <option name="LAST_COMMIT_MESSAGE" value="SortArray class" />
   </component>
 </project>
