@@ -6,7 +6,7 @@ import java.io.IOException;
 public class SortArray {
     private String path;
     private int [] arr;
-    ArrayList<String> intermediate_result;
+    ArrayList<String> result;
     public SortArray(String path) {
         this.path=path;
         read_from_file();
@@ -28,10 +28,10 @@ public class SortArray {
             e.printStackTrace();
         }
     }
-    public  int[] simpleSort(boolean returnIntermediate) {
+    public  ArrayList<String> simpleSort(boolean returnIntermediate) {
         int n = arr.length;
         int[] sortedArr = Arrays.copyOf(arr, n);
-         intermediate_result=new ArrayList<>();
+         result=new ArrayList<>();
           //bubble sort algorithm
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -41,37 +41,27 @@ public class SortArray {
                     sortedArr[j + 1] = temp;
                 }
             }
-            intermediate_result.add(Arrays.toString(sortedArr));
+            if(returnIntermediate)
+            result.add(Arrays.toString(sortedArr));
         }
+        result.add(Arrays.toString(sortedArr));
 
-        if(returnIntermediate)
-        {
-            for(String s:intermediate_result)
-            {
-                System.out.println(s);
-            }
-        }
-
-        return sortedArr;
+        return result;
     }
-    public int[] EfficientSort(boolean returnIntermediate)
+    public ArrayList<String> EfficientSort(boolean returnIntermediate)
     {
         int []sorted_array=arr.clone();
-         intermediate_result=new ArrayList<>();
-        merge_sort(sorted_array,intermediate_result);
-        if(returnIntermediate)
-        {
-            for(String s:intermediate_result)
-            {
-                System.out.println(s);
-            }
-        }
-        return  sorted_array;
+         result=new ArrayList<>();
+        merge_sort(sorted_array,result,returnIntermediate);
+        if(!returnIntermediate)
+            result.add(Arrays.toString(sorted_array));
+        return  result;
     }
-    private void merge_sort(int [] inputArray,ArrayList<String> intermediate_result)
+    private void merge_sort(int [] inputArray,ArrayList<String> intermediate_result,boolean returnIntermediate)
     {
         int merge_size= inputArray.length;
         if(merge_size<2) {
+            if(returnIntermediate)
             intermediate_result.add(Arrays.toString(inputArray));
             return;
         }
@@ -87,12 +77,12 @@ public class SortArray {
         {
             right_array[i-left_size]=inputArray[i];
         }
-        merge_sort(left_array,intermediate_result);
-        merge_sort(right_array,intermediate_result);
-        merge(inputArray,left_array,right_array,intermediate_result);
+        merge_sort(left_array,intermediate_result,returnIntermediate);
+        merge_sort(right_array,intermediate_result,returnIntermediate);
+        merge(inputArray,left_array,right_array,intermediate_result,returnIntermediate);
 
     }
-    private void merge(int[] inputArray,int [] leftArray,int [] rightArray,ArrayList<String> intermediate_result)
+    private void merge(int[] inputArray,int [] leftArray,int [] rightArray,ArrayList<String> intermediate_result,boolean returnIntermediate)
     {
         int left_size= leftArray.length;
         int right_size= rightArray.length;
@@ -117,10 +107,11 @@ public class SortArray {
         {
             inputArray[k++]=rightArray[j++];
         }
+        if(returnIntermediate)
         intermediate_result.add(Arrays.toString(inputArray));
     }
-    public int [] Non_Comparison_Sort(boolean returnIntermediate)
-    {
+    public ArrayList<String> Non_Comparison_Sort(boolean returnIntermediate)
+    {   result=new ArrayList<>();
         int min=Arrays.stream(arr).min().orElse(0);
         int max=Arrays.stream(arr).max().orElse(Integer.MAX_VALUE);
         int [] sortedArray=arr.clone();
@@ -137,8 +128,12 @@ public class SortArray {
                 sortedArray[index++]=i+min;
                 countArray[i]--;
             }
+            if(returnIntermediate)
+                result.add(Arrays.toString(sortedArray));
         }
-        return sortedArray;
+        if(!returnIntermediate)
+            result.add(Arrays.toString(sortedArray));
+        return result;
     }
 
 }
