@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Heap {
     public ArrayList<Integer> arr;
@@ -70,7 +72,8 @@ public class Heap {
 
     public int extract() {
         if (isEmpty()) {
-            throw new IllegalStateException("Heap is empty");
+            System.out.println("\u001B[31mHeap is Empty !!\u001B[0m");
+            return -1;
         }
         int ans = arr.get(0);
         swap(0, size - 1);
@@ -100,7 +103,6 @@ public class Heap {
     }
 
     public void printArr() {
-        System.out.println(size);
         for (int i = 0; i < size; i++) {
             System.out.print(arr.get(i) + " ");
         }
@@ -111,4 +113,13 @@ public class Heap {
         return size == 0;
     }
 
+    public ArrayList<Integer> heapSort() {
+        int n = size;
+        buildMaxHeap(arr);
+        for (int i = n - 1; i >= 0; i--) {
+            swap(0, i);
+            maxHeapify(arr, i, 0);
+        }
+        return arr;
+    }
 }
