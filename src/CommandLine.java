@@ -56,15 +56,15 @@ public class CommandLine {
                  }
              break;
         }
-        String msg = "\u001B[34mFinal Sorted Result :\u001B[0m";
+        String msg = "\u001B[33mFinal Sorted Result :\u001B[0m";
         if (intermediateRes) {
-            msg = "\u001B[34mIntermediate Results :\u001B[31m";
+            msg = "\u001B[33mIntermediate Results :\u001B[0m";
         }
         System.out.println(msg);
         for (int i = 0; i < result.size(); i++) {
-            System.out.println(Arrays.toString(result.get(i)));
+            System.out.println("\u001B[34m"+Arrays.toString(result.get(i))+"\u001B[0m");
         }
-        System.out.println("");
+        System.out.println();
 
     }
 
@@ -98,8 +98,8 @@ public class CommandLine {
             sortAlg = new SortArray(path);
         }
 
-        System.out.println("\u001B[32mFile successfully read\u001B[0m");
-        System.out.println("");
+        System.out.println("\u001B[32mFile successfully read ✅\u001B[0m");
+        System.out.println();
 
 
     }
@@ -116,7 +116,7 @@ public class CommandLine {
             System.out.println("\u001B[31mINVALID INPUT\u001B[0m");
             option = scanner.nextLine();
         }
-        System.out.println("");
+        System.out.println();
         return Integer.valueOf(option);
 
 

@@ -3,32 +3,30 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SortArray {
+    Heap heap;
+    ArrayList<int[]> result;
+    ArrayList<ArrayList<Integer>> result_heap;
+    boolean file_path_error;
     private String path;
     private int[] arr;
-    Heap heap;
     private ArrayList<Integer> heap_arr;
+
+    public SortArray(String path) {
+        this.path = path;
+        read_from_file();
+        heap_arr = convert(arr);
+        heap = new Heap(heap_arr);
+    }
 
     public int[] getArr() {
         return arr;
     }
 
-    ArrayList<int[]> result;
-    ArrayList<ArrayList<Integer>> result_heap;
-    boolean file_path_error;
-
-    public SortArray(String path) {
-        this.path = path;
-        read_from_file();
-        heap_arr=convert(arr);
-        heap=new Heap(heap_arr);
-    }
-    public ArrayList<Integer> convert(int []arr)
-    { ArrayList<Integer> arrayList=new ArrayList<>();
-        for(int i=0;i<arr.length;i++)
-        {
+    public ArrayList<Integer> convert(int[] arr) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
             arrayList.add(arr[i]);
         }
         return arrayList;
@@ -49,57 +47,75 @@ public class SortArray {
             file_path_error = false;
         } catch (IOException e) {
             file_path_error = true;
-//            e.printStackTrace();
-
         }
     }
+
     public ArrayList<ArrayList<Integer>> heapSort(boolean returnIntermediate) {
-  result_heap=new ArrayList<>();
+        result_heap = new ArrayList<>();
         int n = heap.getSize();
-       heap.buildMaxHeap(heap_arr);
+        heap.buildMaxHeap(heap_arr);
+        if (returnIntermediate) {
+            result_heap.add(new ArrayList<>(heap_arr));
+        }
         for (int i = n - 1; i >= 0; i--) {
-            if(returnIntermediate)
-                result_heap.add(heap_arr);
             heap.swap(0, i);
             heap.maxHeapify(heap_arr, i, 0);
-
+            if (returnIntermediate) {
+                boolean isEqual = result_heap.get(result_heap.size() - 1).equals(heap_arr);
+                if (result_heap.size() > 1 && isEqual) {
+                    break;
+                }
+                result_heap.add(new ArrayList<>(heap_arr));
+            }
         }
-    if(!returnIntermediate)
-        result_heap.add(heap_arr);
-    return result_heap;
+        if (!returnIntermediate) {
+            result_heap.add(new ArrayList<>(heap_arr));
+        }
+        return result_heap;
     }
-    public ArrayList<int []> simpleSort(boolean returnIntermediate) {
+
+    public ArrayList<int[]> simpleSort(boolean returnIntermediate) {
         int n = arr.length;
-        int[] sortedArr = Arrays.copyOf(arr, n);
+        int[] sortedArr = arr.clone();
         result = new ArrayList<>();
         //bubble sort algorithm
+        if (returnIntermediate) {
+            result.add(Arrays.copyOf(sortedArr, n));
+        }
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
+
                 if (sortedArr[j] > sortedArr[j + 1]) {
                     int temp = sortedArr[j];
                     sortedArr[j] = sortedArr[j + 1];
                     sortedArr[j + 1] = temp;
                 }
             }
-            if (returnIntermediate)
-                result.add(sortedArr);
+            if (returnIntermediate) {
+                {
+                    if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), sortedArr)) {
+                        break;
+                    }
+                    result.add(Arrays.copyOf(sortedArr, n));
+                }
+            }
         }
-        if(!returnIntermediate)
-        result.add(sortedArr);
-
+        if (!returnIntermediate) {
+            result.add(Arrays.copyOf(sortedArr, n));
+        }
         return result;
     }
 
-    public ArrayList<int []> EfficientSort(boolean returnIntermediate) {
+    public ArrayList<int[]> EfficientSort(boolean returnIntermediate) {
         int[] sorted_array = arr.clone();
-        result = new ArrayList<int[]>();
+        result = new ArrayList<>();
         merge_sort(sorted_array, result, returnIntermediate);
         if (!returnIntermediate)
             result.add(sorted_array);
         return result;
     }
 
-    private void merge_sort(int[] inputArray, ArrayList<int []> intermediate_result, boolean returnIntermediate) {
+    private void merge_sort(int[] inputArray, ArrayList<int[]> intermediate_result, boolean returnIntermediate) {
         int merge_size = inputArray.length;
         if (merge_size < 2) {
             if (returnIntermediate)
@@ -122,7 +138,7 @@ public class SortArray {
 
     }
 
-    private void merge(int[] inputArray, int[] leftArray, int[] rightArray, ArrayList<int []> intermediate_result, boolean returnIntermediate) {
+    private void merge(int[] inputArray, int[] leftArray, int[] rightArray, ArrayList<int[]> intermediate_result, boolean returnIntermediate) {
         int left_size = leftArray.length;
         int right_size = rightArray.length;
         int i = 0, j = 0, k = 0;
@@ -145,8 +161,9 @@ public class SortArray {
             intermediate_result.add(inputArray);
     }
 
-    public ArrayList<int []> Non_Comparison_Sort(boolean returnIntermediate) {
-        result = new ArrayList<int[]>();
+    public ArrayList<int[]> Non_Comparison_Sort(boolean returnIntermediate) {
+        int n = arr.length;
+        result = new ArrayList<>();
         int min = Arrays.stream(arr).min().orElse(0);
         int max = Arrays.stream(arr).max().orElse(Integer.MAX_VALUE);
         int[] sortedArray = arr.clone();
@@ -155,16 +172,19 @@ public class SortArray {
             countArray[value - min]++;
         }
         int index = 0;
+        if (returnIntermediate) {
+            result.add(Arrays.copyOf(sortedArray, n));
+        }
         for (int i = 0; i < max - min + 1; i++) {
             while (countArray[i] > 0) {
                 sortedArray[index++] = i + min;
                 countArray[i]--;
             }
             if (returnIntermediate)
-                result.add(sortedArray);
+                result.add(Arrays.copyOf(sortedArray, n));
         }
         if (!returnIntermediate)
-            result.add(sortedArray);
+            result.add(Arrays.copyOf(sortedArray, n));
         return result;
     }
 

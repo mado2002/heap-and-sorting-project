@@ -1,0 +1,72 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\nimport java.util.Arrays;\n\npublic class Main {\n    public static void main(String[] args) {\n//    CommandLine cl=new CommandLine();\n//    cl.UserInterface();\n        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(10,2,1,1000,5,40,85));\n        Heap h = new Heap(numbers);\n        h.heapSort();\n        h.printArr();\n\n    }}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	
++++ b/src/Main.java	
+@@ -5,9 +5,9 @@
+     public static void main(String[] args) {
+ //    CommandLine cl=new CommandLine();
+ //    cl.UserInterface();
+-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(10,2,1,1000,5,40,85));
++        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(10, 2, 1, 1000, 5, 40, 85));
+         Heap h = new Heap(numbers);
+         h.heapSort();
+         h.printArr();
+-
+-    }}
+\ No newline at end of file
++    }
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"91a22561-522d-4f63-932b-cf635bbb3eed\" name=\"Changes\" comment=\"UI colors\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Heap.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Heap.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CodeStyleSettingsInfer\">\n    <option name=\"done\" value=\"true\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectCodeStyleSettingsMigration\">\n    <option name=\"version\" value=\"2\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2QFfZYoVAwGUk1GqIveeO5a5ROC\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"git-widget-placeholder\": \"master\"\n  }\n}]]></component>\n  <component name=\"RunManager\">\n    <configuration name=\"Command Line\" type=\"Application\" factoryName=\"Application\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <module name=\"Heap and Sorting project\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"91a22561-522d-4f63-932b-cf635bbb3eed\" name=\"Changes\" comment=\"\" />\n      <created>1684954307625</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1684954307625</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"empty\">\n      <created>1684954560328</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684954560328</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"SortArray class\">\n      <created>1684956508389</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684956508389</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"SortArray class done\">\n      <created>1684978048848</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684978048848</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"UI colors\">\n      <created>1685236499351</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685236499351</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"empty\" />\n    <MESSAGE value=\"SortArray class\" />\n    <MESSAGE value=\"SortArray class done\" />\n    <MESSAGE value=\"UI colors\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"UI colors\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="UI colors">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heap.java" afterDir="false" />
++    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="heap sort">
+       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -95,7 +93,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1685236499351</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="heap sort">
++      <created>1685238046652</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1685238046652</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+@@ -104,6 +109,7 @@
+     <MESSAGE value="SortArray class" />
+     <MESSAGE value="SortArray class done" />
+     <MESSAGE value="UI colors" />
+-    <option name="LAST_COMMIT_MESSAGE" value="UI colors" />
++    <MESSAGE value="heap sort" />
++    <option name="LAST_COMMIT_MESSAGE" value="heap sort" />
+   </component>
+ </project>
+\ No newline at end of file
