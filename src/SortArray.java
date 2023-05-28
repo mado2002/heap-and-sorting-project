@@ -7,6 +7,7 @@ public class SortArray {
     private String path;
     private int [] arr;
     ArrayList<String> result;
+    boolean file_path_error;
     public SortArray(String path) {
         this.path=path;
         read_from_file();
@@ -24,8 +25,11 @@ public class SortArray {
                 arr[i] = Integer.parseInt(strArray[i]);
             }
             bufferedReader.close();
+            file_path_error=false;
         } catch (IOException e) {
-            e.printStackTrace();
+            file_path_error=true;
+//            e.printStackTrace();
+
         }
     }
     public  ArrayList<String> simpleSort(boolean returnIntermediate) {
