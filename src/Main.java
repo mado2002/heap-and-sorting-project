@@ -1,11 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-     SortArray sortArray=new SortArray("test1.txt");
-     ArrayList<String> result = sortArray.Non_Comparison_Sort(true);
-     for(String s:result)
-     {
-         System.out.println(s);
-     }
+        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(10,20,15,12,40,25,18));
+        Heap h = new Heap(numbers);
+
+        h.printArr();
     }
 }
