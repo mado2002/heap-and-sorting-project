@@ -23,15 +23,6 @@ public class SortArray {
         heap = new Heap(heap_arr);
     }
 
-//
-//    public ArrayList<Integer> convert(int[] arr) {
-//        ArrayList<Integer> arrayList = new ArrayList<>();
-//        for (int i = 0; i < arr.length; i++) {
-//            arrayList.add(arr[i]);
-//        }
-//        return arrayList;
-//    }
-
     public void read_from_file() {
         try {
             FileReader fileReader = new FileReader(path);
@@ -53,23 +44,23 @@ public class SortArray {
     public ArrayList<int[]> heapSort(boolean returnIntermediate) {
         result = new ArrayList<>();
         int n = heap.getSize();
-        heap.buildMaxHeap(heap_arr);
-        //System.out.println(Arrays.toString(heap_arr));
+        int[] sortedArr = heap.getArr();
+
         if (returnIntermediate) {
-            result.add(Arrays.copyOf(heap_arr, n));
+            result.add(Arrays.copyOf(sortedArr, n));
         }
         for (int i = n - 1; i >= 0; i--) {
             heap.swap(0, i);
-            heap.maxHeapify(heap_arr, i, 0);
+            heap.maxHeapify(sortedArr, i, 0);
             if (returnIntermediate) {
-                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), heap_arr)) {
+                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), sortedArr)) {
                     break;
                 }
-                result.add(Arrays.copyOf(heap_arr, n));
+                result.add(Arrays.copyOf(sortedArr, n));
             }
         }
         if (!returnIntermediate) {
-            result.add(Arrays.copyOf(heap_arr, n));
+            result.add(Arrays.copyOf(sortedArr, n));
         }
         return result;
     }

@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Heap {
@@ -10,12 +8,13 @@ public class Heap {
     public int getSize() {
         return size;
     }
+
     public int[] getArr() {
         return arr;
     }
 
     public Heap(int[] initialArray) {
-        arr = Arrays.copyOf(initialArray,initialArray.length);
+        arr = Arrays.copyOf(initialArray, initialArray.length);
         size = initialArray.length;
         buildMaxHeap(arr);
     }
@@ -23,8 +22,8 @@ public class Heap {
 
     public void swap(int i, int j) {
         int temp = arr[i];
-        arr[i] =  arr[j];
-        arr[j] =  temp;
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     public void maxHeapify(int[] list, int n, int index) {
@@ -52,18 +51,4 @@ public class Heap {
             maxHeapify(list, n, i);
         }
     }
-    
-
-    public void printArr() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-
 }

@@ -55,7 +55,6 @@ public class PriorityQueue {
         }
     }
 
-
     public void insert(int value) {
         arr.add(size, value);
         heapifyUp(size);
@@ -111,7 +110,6 @@ public class PriorityQueue {
     public boolean isEmpty() {
         return size == 0;
     }
-
 
 }
 

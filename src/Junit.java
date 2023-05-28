@@ -18,23 +18,22 @@ public class Junit {
     SortArray sortArray9 = new SortArray("50k.txt");
     SortArray sortArray10 = new SortArray("1M.txt");
 
-
     @Test
     public void Time_Comparison_sort() {
-//        long start1 = System.currentTimeMillis();
-//        sortArray4.simpleSort(false);
-//        long end1 = System.currentTimeMillis();
-//        long duration1 = (end1 - start1);
+        long start1 = System.currentTimeMillis();
+        sortArray10.simpleSort(false);
+        long end1 = System.currentTimeMillis();
+        long duration1 = (end1 - start1);
 
         long start2 = System.currentTimeMillis();
         sortArray10.EfficientSort(false);
         long end2 = System.currentTimeMillis();
         long duration2 = (end2 - start2);
 
-//        long start3 = System.currentTimeMillis();
-//        sortArray4.Non_Comparison_Sort(false);
-//        long end3 = System.currentTimeMillis();
-//        long duration3 = (end3 - start3);
+        long start3 = System.currentTimeMillis();
+        sortArray10.Non_Comparison_Sort(false);
+        long end3 = System.currentTimeMillis();
+        long duration3 = (end3 - start3);
 
         long start4 = System.currentTimeMillis();
         sortArray10.heapSort(false);
@@ -42,9 +41,9 @@ public class Junit {
         long duration4 = (end4 - start4);
 
         System.out.println("Time to sort the array with:");
-       // System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
+        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
         System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
-       // System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
+        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
         System.out.println("\u001B[36m[Heap sort] = (" + duration4 + ") ms\u001B[0m");
     }
 
@@ -85,7 +84,7 @@ public class Junit {
     }
 
     @Test
-    public void Non_Comparison_sort() {
+    public void Test_Non_Comparison_sort() {
         ArrayList<int[]> result = sortArray1.Non_Comparison_Sort(false);
         int[] arr = sortArray1.getArr();
         //sorting the array with built-in java sort
@@ -96,7 +95,7 @@ public class Junit {
 
 
     @Test
-    public void Time_Comparison_with_respect_to_CountingSort() { //2 words!
+    public void Time_Comparison_with_respect_to_CountingSort() {
         long start1 = System.nanoTime();
         sortArray8.simpleSort(false);
         long end1 = System.nanoTime();
