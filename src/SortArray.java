@@ -3,16 +3,35 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SortArray {
     private String path;
     private int[] arr;
-    ArrayList<String> result;
+    Heap heap;
+    private ArrayList<Integer> heap_arr;
+
+    public int[] getArr() {
+        return arr;
+    }
+
+    ArrayList<int[]> result;
+    ArrayList<ArrayList<Integer>> result_heap;
     boolean file_path_error;
 
     public SortArray(String path) {
         this.path = path;
         read_from_file();
+        heap_arr=convert(arr);
+        heap=new Heap(heap_arr);
+    }
+    public ArrayList<Integer> convert(int []arr)
+    { ArrayList<Integer> arrayList=new ArrayList<>();
+        for(int i=0;i<arr.length;i++)
+        {
+            arrayList.add(arr[i]);
+        }
+        return arrayList;
     }
 
     public void read_from_file() {
@@ -34,8 +53,22 @@ public class SortArray {
 
         }
     }
+    public ArrayList<ArrayList<Integer>> heapSort(boolean returnIntermediate) {
+  result_heap=new ArrayList<>();
+        int n = heap.getSize();
+       heap.buildMaxHeap(heap_arr);
+        for (int i = n - 1; i >= 0; i--) {
+            if(returnIntermediate)
+                result_heap.add(heap_arr);
+            heap.swap(0, i);
+            heap.maxHeapify(heap_arr, i, 0);
 
-    public ArrayList<String> simpleSort(boolean returnIntermediate) {
+        }
+    if(!returnIntermediate)
+        result_heap.add(heap_arr);
+    return result_heap;
+    }
+    public ArrayList<int []> simpleSort(boolean returnIntermediate) {
         int n = arr.length;
         int[] sortedArr = Arrays.copyOf(arr, n);
         result = new ArrayList<>();
@@ -49,27 +82,28 @@ public class SortArray {
                 }
             }
             if (returnIntermediate)
-                result.add(Arrays.toString(sortedArr));
+                result.add(sortedArr);
         }
-        result.add(Arrays.toString(sortedArr));
+        if(!returnIntermediate)
+        result.add(sortedArr);
 
         return result;
     }
 
-    public ArrayList<String> EfficientSort(boolean returnIntermediate) {
+    public ArrayList<int []> EfficientSort(boolean returnIntermediate) {
         int[] sorted_array = arr.clone();
-        result = new ArrayList<>();
+        result = new ArrayList<int[]>();
         merge_sort(sorted_array, result, returnIntermediate);
         if (!returnIntermediate)
-            result.add(Arrays.toString(sorted_array));
+            result.add(sorted_array);
         return result;
     }
 
-    private void merge_sort(int[] inputArray, ArrayList<String> intermediate_result, boolean returnIntermediate) {
+    private void merge_sort(int[] inputArray, ArrayList<int []> intermediate_result, boolean returnIntermediate) {
         int merge_size = inputArray.length;
         if (merge_size < 2) {
             if (returnIntermediate)
-                intermediate_result.add(Arrays.toString(inputArray));
+                intermediate_result.add(inputArray);
             return;
         }
         int left_size = merge_size / 2;
@@ -88,7 +122,7 @@ public class SortArray {
 
     }
 
-    private void merge(int[] inputArray, int[] leftArray, int[] rightArray, ArrayList<String> intermediate_result, boolean returnIntermediate) {
+    private void merge(int[] inputArray, int[] leftArray, int[] rightArray, ArrayList<int []> intermediate_result, boolean returnIntermediate) {
         int left_size = leftArray.length;
         int right_size = rightArray.length;
         int i = 0, j = 0, k = 0;
@@ -108,11 +142,11 @@ public class SortArray {
             inputArray[k++] = rightArray[j++];
         }
         if (returnIntermediate)
-            intermediate_result.add(Arrays.toString(inputArray));
+            intermediate_result.add(inputArray);
     }
 
-    public ArrayList<String> Non_Comparison_Sort(boolean returnIntermediate) {
-        result = new ArrayList<>();
+    public ArrayList<int []> Non_Comparison_Sort(boolean returnIntermediate) {
+        result = new ArrayList<int[]>();
         int min = Arrays.stream(arr).min().orElse(0);
         int max = Arrays.stream(arr).max().orElse(Integer.MAX_VALUE);
         int[] sortedArray = arr.clone();
@@ -127,10 +161,10 @@ public class SortArray {
                 countArray[i]--;
             }
             if (returnIntermediate)
-                result.add(Arrays.toString(sortedArray));
+                result.add(sortedArray);
         }
         if (!returnIntermediate)
-            result.add(Arrays.toString(sortedArray));
+            result.add(sortedArray);
         return result;
     }
 

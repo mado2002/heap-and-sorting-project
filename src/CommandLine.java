@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandLine {
@@ -35,7 +37,7 @@ public class CommandLine {
     }
 
     public void PrintRes(int sort) {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<int []> result = new ArrayList<>();
         switch (sort) {
             case 1:
                 result = sortAlg.simpleSort(intermediateRes);
@@ -46,7 +48,13 @@ public class CommandLine {
             case 3:
                 result = sortAlg.Non_Comparison_Sort(intermediateRes);
                 break;
-//            case 4: sortAlg.
+             case 4:
+                 ArrayList<ArrayList<Integer>> temp=sortAlg.heapSort(intermediateRes);
+                 for(ArrayList<Integer> arr:temp)
+                 {
+                     result.add(arr.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray());
+                 }
+             break;
         }
         String msg = "\u001B[34mFinal Sorted Result :\u001B[0m";
         if (intermediateRes) {
@@ -54,7 +62,7 @@ public class CommandLine {
         }
         System.out.println(msg);
         for (int i = 0; i < result.size(); i++) {
-            System.out.println(result.get(i));
+            System.out.println(Arrays.toString(result.get(i)));
         }
         System.out.println("");
 

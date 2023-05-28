@@ -4,7 +4,11 @@ import java.util.Arrays;
 
 public class Heap {
     public ArrayList<Integer> arr;
-    public int size;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     public Heap(ArrayList<Integer> initialArray) {
         this.arr = initialArray;
@@ -113,13 +117,5 @@ public class Heap {
         return size == 0;
     }
 
-    public ArrayList<Integer> heapSort() {
-        int n = size;
-        buildMaxHeap(arr);
-        for (int i = n - 1; i >= 0; i--) {
-            swap(0, i);
-            maxHeapify(arr, i, 0);
-        }
-        return arr;
-    }
+
 }
