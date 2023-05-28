@@ -60,9 +60,6 @@ public class SortArray {
         for (int i = n - 1; i >= 0; i--) {
             heap.swap(0, i);
             heap.maxHeapify(heap_arr, i, 0);
-            //int extracted = heap.extract();
-            //heap_arr.add(extracted);
-            // heap.append(i,extracted);
             if (returnIntermediate) {
                 boolean isEqual = result_heap.get(result_heap.size() - 1).equals(heap_arr);
                 if (result_heap.size() > 1 && isEqual) {

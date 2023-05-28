@@ -15,27 +15,28 @@ public class Junit {
     SortArray sortArray6 = new SortArray("test1.txt");
     SortArray sortArray7 = new SortArray("Counting.txt");
     SortArray sortArray8 = new SortArray("2.txt");
+    SortArray sortArray9 = new SortArray("50k.txt");
 
 
     @Test
     public void Time_Comparison_sort() { //100,000 words
         long start1 = System.currentTimeMillis();
-        sortArray4.simpleSort(false);
+        sortArray9.simpleSort(false);
         long end1 = System.currentTimeMillis();
         long duration1 = (end1 - start1);
 
         long start2 = System.currentTimeMillis();
-        sortArray4.EfficientSort(false);
+        sortArray9.EfficientSort(false);
         long end2 = System.currentTimeMillis();
         long duration2 = (end2 - start2);
 
         long start3 = System.currentTimeMillis();
-        sortArray4.Non_Comparison_Sort(false);
+        sortArray9.Non_Comparison_Sort(false);
         long end3 = System.currentTimeMillis();
         long duration3 = (end3 - start3);
 
         long start4 = System.currentTimeMillis();
-        sortArray4.heapSort(false);
+        sortArray9.heapSort(false);
         long end4 = System.currentTimeMillis();
         long duration4 = (end4 - start4);
 

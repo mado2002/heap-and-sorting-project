@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Heap {
-    public ArrayList<Integer> arr;
+    private ArrayList<Integer> arr;
     private int size;
 
     public int getSize() {
@@ -104,10 +104,6 @@ public class Heap {
             swap(i, largest);
             heapifyDown(largest);
         }
-    }
-
-    public void append(int index, int value){
-        arr.set(index,value);
     }
 
     public void printArr() {
