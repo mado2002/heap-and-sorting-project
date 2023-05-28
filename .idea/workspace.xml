@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="UI colors">
+    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="Intermediate Solved ✅">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10,000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/10k.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/100,000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/100k.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/1k.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Junit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Junit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685236499351</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Intermediate Solved ✅">
+      <created>1685250784966</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685250784966</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -109,6 +110,7 @@
     <MESSAGE value="SortArray class" />
     <MESSAGE value="SortArray class done" />
     <MESSAGE value="UI colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI colors" />
+    <MESSAGE value="Intermediate Solved ✅" />
+    <option name="LAST_COMMIT_MESSAGE" value="Intermediate Solved ✅" />
   </component>
 </project>
