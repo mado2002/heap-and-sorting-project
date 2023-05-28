@@ -7,30 +7,30 @@ import java.util.Arrays;
 public class SortArray {
     Heap heap;
     ArrayList<int[]> result;
-    ArrayList<ArrayList<Integer>> result_heap;
     boolean file_path_error;
     private String path;
     private int[] arr;
-    private ArrayList<Integer> heap_arr;
-
-    public SortArray(String path) {
-        this.path = path;
-        read_from_file();
-        heap_arr = convert(arr);
-        heap = new Heap(heap_arr);
-    }
+    private int[] heap_arr;
 
     public int[] getArr() {
         return arr;
     }
 
-    public ArrayList<Integer> convert(int[] arr) {
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            arrayList.add(arr[i]);
-        }
-        return arrayList;
+    public SortArray(String path) {
+        this.path = path;
+        read_from_file();
+        heap_arr = Arrays.copyOf(arr, arr.length);
+        heap = new Heap(heap_arr);
     }
+
+//
+//    public ArrayList<Integer> convert(int[] arr) {
+//        ArrayList<Integer> arrayList = new ArrayList<>();
+//        for (int i = 0; i < arr.length; i++) {
+//            arrayList.add(arr[i]);
+//        }
+//        return arrayList;
+//    }
 
     public void read_from_file() {
         try {
@@ -50,28 +50,28 @@ public class SortArray {
         }
     }
 
-    public ArrayList<ArrayList<Integer>> heapSort(boolean returnIntermediate) {
-        result_heap = new ArrayList<>();
+    public ArrayList<int[]> heapSort(boolean returnIntermediate) {
+        result = new ArrayList<>();
         int n = heap.getSize();
         heap.buildMaxHeap(heap_arr);
+        //System.out.println(Arrays.toString(heap_arr));
         if (returnIntermediate) {
-            result_heap.add(new ArrayList<>(heap_arr));
+            result.add(Arrays.copyOf(heap_arr, n));
         }
         for (int i = n - 1; i >= 0; i--) {
             heap.swap(0, i);
             heap.maxHeapify(heap_arr, i, 0);
             if (returnIntermediate) {
-                boolean isEqual = result_heap.get(result_heap.size() - 1).equals(heap_arr);
-                if (result_heap.size() > 1 && isEqual) {
+                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), heap_arr)) {
                     break;
                 }
-                result_heap.add(new ArrayList<>(heap_arr));
+                result.add(Arrays.copyOf(heap_arr, n));
             }
         }
         if (!returnIntermediate) {
-            result_heap.add(new ArrayList<>(heap_arr));
+            result.add(Arrays.copyOf(heap_arr, n));
         }
-        return result_heap;
+        return result;
     }
 
     public ArrayList<int[]> simpleSort(boolean returnIntermediate) {

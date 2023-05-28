@@ -49,12 +49,14 @@ public class CommandLine {
                 result = sortAlg.Non_Comparison_Sort(intermediateRes);
                 break;
              case 4:
-                 ArrayList<ArrayList<Integer>> temp=sortAlg.heapSort(intermediateRes);
-                 for(ArrayList<Integer> arr:temp)
-                 {
-                     result.add(arr.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray());
-                 }
-             break;
+                 result = sortAlg.heapSort(intermediateRes);
+                 break;
+//                 ArrayList<ArrayList<Integer>> temp=sortAlg.heapSort(intermediateRes);
+//                 for(ArrayList<Integer> arr:temp)
+//                 {
+//                     result.add(arr.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray());
+//                 }
+//             break;
         }
         String msg = "\u001B[33mFinal Sorted Result :\u001B[0m";
         if (intermediateRes) {
