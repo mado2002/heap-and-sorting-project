@@ -8,9 +8,8 @@ public class SortArray {
     Heap heap;
     ArrayList<int[]> result;
     boolean file_path_error;
-    private String path;
+    private  String path;
     private int[] arr;
-    private int[] heap_arr;
 
     public int[] getArr() {
         return arr;
@@ -19,8 +18,6 @@ public class SortArray {
     public SortArray(String path) {
         this.path = path;
         read_from_file();
-        heap_arr = Arrays.copyOf(arr, arr.length);
-        heap = new Heap(heap_arr);
     }
 
     public void read_from_file() {
@@ -42,12 +39,13 @@ public class SortArray {
     }
 
     public ArrayList<int[]> heapSort(boolean returnIntermediate) {
+        heap = new Heap(arr);
         result = new ArrayList<>();
         int n = heap.getSize();
         int[] sortedArr = heap.getArr();
-
         if (returnIntermediate) {
-            result.add(Arrays.copyOf(sortedArr, n));
+            result.add(Arrays.copyOf(arr, n));
+            result.add(Arrays.copyOf(sortedArr,n));
         }
         for (int i = n - 1; i >= 0; i--) {
             heap.swap(0, i);

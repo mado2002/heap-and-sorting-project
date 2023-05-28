@@ -1,0 +1,307 @@
+Index: src/PriorityQueue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\n\npublic class PriorityQueue {\n\n    private ArrayList<Integer> arr;\n    private int size;\n\n    public PriorityQueue(ArrayList<Integer> initialArray) {\n        this.arr = initialArray;\n        this.size = initialArray.size();\n        buildMaxHeap(arr);\n    }\n\n    public int parent(int i) {\n        return (i - 1) / 2;\n    }\n\n    public int leftChild(int i) {\n        return 2 * i + 1;\n    }\n\n    public int rightChild(int i) {\n        return 2 * i + 2;\n    }\n\n    public void swap(int i, int j) {\n        int temp = arr.get(i);\n        arr.set(i, arr.get(j));\n        arr.set(j, temp);\n    }\n\n    public void maxHeapify(ArrayList<Integer> list, int n, int index) {\n        int left = 2 * index + 1;\n        int right = 2 * index + 2;\n        int max = index;\n\n        if (left < n && list.get(left) > list.get(max)) {\n            max = left;\n        }\n\n        if (right < n && list.get(right) > list.get(max)) {\n            max = right;\n        }\n\n        if (max != index) {\n            swap(index, max);\n            maxHeapify(list, n, max);\n        }\n    }\n\n    public void buildMaxHeap(ArrayList<Integer> list) {\n        int n = list.size();\n        for (int i = n / 2 - 1; i >= 0; i--) {\n            maxHeapify(list, n, i);\n        }\n    }\n\n\n    public void insert(int value) {\n        arr.add(size, value);\n        heapifyUp(size);\n        size++;\n    }\n\n    public void heapifyUp(int i) {\n        while (i > 0 && arr.get(i) > arr.get(parent(i))) {\n            swap(i, parent(i));\n            i = parent(i);\n        }\n    }\n\n    public int extract() {\n        if (isEmpty()) {\n            System.out.println(\"\\u001B[31mHeap is Empty !!\\u001B[0m\");\n            return -1;\n        }\n        int ans = arr.get(0);\n        swap(0, size - 1);\n        arr.remove(size - 1);\n        size--;\n        heapifyDown(0);\n        return ans;\n    }\n\n    public void heapifyDown(int i) {\n        int largest = i;\n        int left = leftChild(i);\n        int right = rightChild(i);\n\n        if (left < size && arr.get(left) > arr.get(largest)) {\n            largest = left;\n        }\n\n        if (right < size && arr.get(right) > arr.get(largest)) {\n            largest = right;\n        }\n\n        if (largest != i) {\n            swap(i, largest);\n            heapifyDown(largest);\n        }\n    }\n\n    public void printArr() {\n        for (int i = 0; i < size; i++) {\n            System.out.print(arr.get(i) + \" \");\n        }\n        System.out.println();\n    }\n\n    public boolean isEmpty() {\n        return size == 0;\n    }\n\n\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/PriorityQueue.java b/src/PriorityQueue.java
+--- a/src/PriorityQueue.java	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/src/PriorityQueue.java	(date 1685312322447)
+@@ -55,7 +55,6 @@
+         }
+     }
+ 
+-
+     public void insert(int value) {
+         arr.add(size, value);
+         heapifyUp(size);
+@@ -112,6 +111,5 @@
+         return size == 0;
+     }
+ 
+-
+ }
+ 
+Index: src/SortArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.Arrays;\n\npublic class SortArray {\n    Heap heap;\n    ArrayList<int[]> result;\n    boolean file_path_error;\n    private String path;\n    private int[] arr;\n    private int[] heap_arr;\n\n    public int[] getArr() {\n        return arr;\n    }\n\n    public SortArray(String path) {\n        this.path = path;\n        read_from_file();\n        heap_arr = Arrays.copyOf(arr, arr.length);\n        heap = new Heap(heap_arr);\n    }\n\n//\n//    public ArrayList<Integer> convert(int[] arr) {\n//        ArrayList<Integer> arrayList = new ArrayList<>();\n//        for (int i = 0; i < arr.length; i++) {\n//            arrayList.add(arr[i]);\n//        }\n//        return arrayList;\n//    }\n\n    public void read_from_file() {\n        try {\n            FileReader fileReader = new FileReader(path);\n            BufferedReader bufferedReader = new BufferedReader(fileReader);\n            String line;\n            line = bufferedReader.readLine();\n            String[] strArray = line.split(\",\");\n            arr = new int[strArray.length];\n            for (int i = 0; i < strArray.length; i++) {\n                arr[i] = Integer.parseInt(strArray[i]);\n            }\n            bufferedReader.close();\n            file_path_error = false;\n        } catch (IOException e) {\n            file_path_error = true;\n        }\n    }\n\n    public ArrayList<int[]> heapSort(boolean returnIntermediate) {\n        result = new ArrayList<>();\n        int n = heap.getSize();\n        heap.buildMaxHeap(heap_arr);\n        //System.out.println(Arrays.toString(heap_arr));\n        if (returnIntermediate) {\n            result.add(Arrays.copyOf(heap_arr, n));\n        }\n        for (int i = n - 1; i >= 0; i--) {\n            heap.swap(0, i);\n            heap.maxHeapify(heap_arr, i, 0);\n            if (returnIntermediate) {\n                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), heap_arr)) {\n                    break;\n                }\n                result.add(Arrays.copyOf(heap_arr, n));\n            }\n        }\n        if (!returnIntermediate) {\n            result.add(Arrays.copyOf(heap_arr, n));\n        }\n        return result;\n    }\n\n    public ArrayList<int[]> simpleSort(boolean returnIntermediate) {\n        int n = arr.length;\n        int[] sortedArr = arr.clone();\n        result = new ArrayList<>();\n        //bubble sort algorithm\n        if (returnIntermediate) {\n            result.add(Arrays.copyOf(sortedArr, n));\n        }\n        for (int i = 0; i < n - 1; i++) {\n            for (int j = 0; j < n - i - 1; j++) {\n\n                if (sortedArr[j] > sortedArr[j + 1]) {\n                    int temp = sortedArr[j];\n                    sortedArr[j] = sortedArr[j + 1];\n                    sortedArr[j + 1] = temp;\n                }\n            }\n            if (returnIntermediate) {\n                {\n                    if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), sortedArr)) {\n                        break;\n                    }\n                    result.add(Arrays.copyOf(sortedArr, n));\n                }\n            }\n        }\n        if (!returnIntermediate) {\n            result.add(Arrays.copyOf(sortedArr, n));\n        }\n        return result;\n    }\n\n    public ArrayList<int[]> EfficientSort(boolean returnIntermediate) {\n        int[] sorted_array = arr.clone();\n        result = new ArrayList<>();\n        merge_sort(sorted_array, result, returnIntermediate);\n        if (!returnIntermediate)\n            result.add(sorted_array);\n        return result;\n    }\n\n    private void merge_sort(int[] inputArray, ArrayList<int[]> intermediate_result, boolean returnIntermediate) {\n        int merge_size = inputArray.length;\n        if (merge_size < 2) {\n            if (returnIntermediate)\n                intermediate_result.add(inputArray);\n            return;\n        }\n        int left_size = merge_size / 2;\n        int right_size = merge_size - left_size;\n        int[] left_array = new int[left_size];\n        int[] right_array = new int[right_size];\n        for (int i = 0; i < left_size; i++) {\n            left_array[i] = inputArray[i];\n        }\n        for (int i = left_size; i < merge_size; i++) {\n            right_array[i - left_size] = inputArray[i];\n        }\n        merge_sort(left_array, intermediate_result, returnIntermediate);\n        merge_sort(right_array, intermediate_result, returnIntermediate);\n        merge(inputArray, left_array, right_array, intermediate_result, returnIntermediate);\n\n    }\n\n    private void merge(int[] inputArray, int[] leftArray, int[] rightArray, ArrayList<int[]> intermediate_result, boolean returnIntermediate) {\n        int left_size = leftArray.length;\n        int right_size = rightArray.length;\n        int i = 0, j = 0, k = 0;\n\n        while (i < left_size && j < right_size) {\n            if (leftArray[i] <= rightArray[j]) {\n                inputArray[k] = leftArray[i++];\n            } else {\n                inputArray[k] = rightArray[j++];\n            }\n            k++;\n        }\n        while (i < left_size) {\n            inputArray[k++] = leftArray[i++];\n        }\n        while (j < right_size) {\n            inputArray[k++] = rightArray[j++];\n        }\n        if (returnIntermediate)\n            intermediate_result.add(inputArray);\n    }\n\n    public ArrayList<int[]> Non_Comparison_Sort(boolean returnIntermediate) {\n        int n = arr.length;\n        result = new ArrayList<>();\n        int min = Arrays.stream(arr).min().orElse(0);\n        int max = Arrays.stream(arr).max().orElse(Integer.MAX_VALUE);\n        int[] sortedArray = arr.clone();\n        int[] countArray = new int[max - min + 1];\n        for (int value : sortedArray) {\n            countArray[value - min]++;\n        }\n        int index = 0;\n        if (returnIntermediate) {\n            result.add(Arrays.copyOf(sortedArray, n));\n        }\n        for (int i = 0; i < max - min + 1; i++) {\n            while (countArray[i] > 0) {\n                sortedArray[index++] = i + min;\n                countArray[i]--;\n            }\n            if (returnIntermediate)\n                result.add(Arrays.copyOf(sortedArray, n));\n        }\n        if (!returnIntermediate)\n            result.add(Arrays.copyOf(sortedArray, n));\n        return result;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SortArray.java b/src/SortArray.java
+--- a/src/SortArray.java	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/src/SortArray.java	(date 1685312960637)
+@@ -23,15 +23,6 @@
+         heap = new Heap(heap_arr);
+     }
+ 
+-//
+-//    public ArrayList<Integer> convert(int[] arr) {
+-//        ArrayList<Integer> arrayList = new ArrayList<>();
+-//        for (int i = 0; i < arr.length; i++) {
+-//            arrayList.add(arr[i]);
+-//        }
+-//        return arrayList;
+-//    }
+-
+     public void read_from_file() {
+         try {
+             FileReader fileReader = new FileReader(path);
+@@ -53,23 +44,23 @@
+     public ArrayList<int[]> heapSort(boolean returnIntermediate) {
+         result = new ArrayList<>();
+         int n = heap.getSize();
+-        heap.buildMaxHeap(heap_arr);
+-        //System.out.println(Arrays.toString(heap_arr));
++        int[] sortedArr = heap.getArr();
++
+         if (returnIntermediate) {
+-            result.add(Arrays.copyOf(heap_arr, n));
++            result.add(Arrays.copyOf(sortedArr, n));
+         }
+         for (int i = n - 1; i >= 0; i--) {
+             heap.swap(0, i);
+-            heap.maxHeapify(heap_arr, i, 0);
++            heap.maxHeapify(sortedArr, i, 0);
+             if (returnIntermediate) {
+-                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), heap_arr)) {
++                if (result.size() > 1 && Arrays.equals(result.get(result.size() - 1), sortedArr)) {
+                     break;
+                 }
+-                result.add(Arrays.copyOf(heap_arr, n));
++                result.add(Arrays.copyOf(sortedArr, n));
+             }
+         }
+         if (!returnIntermediate) {
+-            result.add(Arrays.copyOf(heap_arr, n));
++            result.add(Arrays.copyOf(sortedArr, n));
+         }
+         return result;
+     }
+Index: src/Junit.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.junit.Test;\n\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\n\nimport static org.junit.Assert.assertTrue;\n\npublic class Junit {\n    SortArray sortArray1 = new SortArray(\"100.txt\");\n    SortArray sortArray2 = new SortArray(\"1k.txt\");\n    SortArray sortArray3 = new SortArray(\"10k.txt\");\n    SortArray sortArray4 = new SortArray(\"100k.txt\");\n    SortArray sortArray5 = new SortArray(\"bestCounting.txt\");\n    SortArray sortArray6 = new SortArray(\"test1.txt\");\n    SortArray sortArray7 = new SortArray(\"Counting.txt\");\n    SortArray sortArray8 = new SortArray(\"2.txt\");\n    SortArray sortArray9 = new SortArray(\"50k.txt\");\n    SortArray sortArray10 = new SortArray(\"1M.txt\");\n\n\n    @Test\n    public void Time_Comparison_sort() {\n//        long start1 = System.currentTimeMillis();\n//        sortArray4.simpleSort(false);\n//        long end1 = System.currentTimeMillis();\n//        long duration1 = (end1 - start1);\n\n        long start2 = System.currentTimeMillis();\n        sortArray10.EfficientSort(false);\n        long end2 = System.currentTimeMillis();\n        long duration2 = (end2 - start2);\n\n//        long start3 = System.currentTimeMillis();\n//        sortArray4.Non_Comparison_Sort(false);\n//        long end3 = System.currentTimeMillis();\n//        long duration3 = (end3 - start3);\n\n        long start4 = System.currentTimeMillis();\n        sortArray10.heapSort(false);\n        long end4 = System.currentTimeMillis();\n        long duration4 = (end4 - start4);\n\n        System.out.println(\"Time to sort the array with:\");\n       // System.out.println(\"\\u001B[35m[Simple Sort] = (\" + duration1 + \") ms\\u001B[0m\");\n        System.out.println(\"\\u001B[34m[Efficient Sort] = (\" + duration2 + \") ms\\u001B[0m\");\n       // System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration3 + \") ms\\u001B[0m\");\n        System.out.println(\"\\u001B[36m[Heap sort] = (\" + duration4 + \") ms\\u001B[0m\");\n    }\n\n\n    @Test\n    public void Test_Simple_sort() {\n        ArrayList<int[]> result = sortArray1.simpleSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        System.out.println(Arrays.toString(result.get(0)));\n        boolean isEqual = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEqual);\n    }\n\n    @Test\n    public void Test_Heap_sort() {\n        ArrayList<int[]> result = sortArray1.heapSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        System.out.println(Arrays.toString(result.get(0)));\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n\n    @Test\n    public void Test_Efficient_sort() {\n        ArrayList<int[]> result = sortArray1.EfficientSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n    @Test\n    public void Non_Comparison_sort() {\n        ArrayList<int[]> result = sortArray1.Non_Comparison_Sort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n\n    @Test\n    public void Time_Comparison_with_respect_to_CountingSort() { //2 words!\n        long start1 = System.nanoTime();\n        sortArray8.simpleSort(false);\n        long end1 = System.nanoTime();\n        long duration1 = (end1 - start1);\n\n        long start2 = System.nanoTime();\n        sortArray8.EfficientSort(false);\n        long end2 = System.nanoTime();\n        long duration2 = (end2 - start2);\n\n        long start3 = System.nanoTime();\n        sortArray8.Non_Comparison_Sort(false);\n        long end3 = System.nanoTime();\n        long duration3 = (end3 - start3);\n\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[35m[Simple Sort] = (\" + duration1 + \") ns\\u001B[0m\");\n        System.out.println(\"\\u001B[34m[Efficient Sort] = (\" + duration2 + \") ns\\u001B[0m\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration3 + \") ns\\u001B[0m\");\n    }\n\n    @Test\n    public void Best_Case_NonComparisonSort() {\n        long start = System.nanoTime();\n        sortArray5.Non_Comparison_Sort(false);\n        long end = System.nanoTime();\n        long duration = (end - start);\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration + \") ns\\u001B[0m\");\n    }\n\n    @Test\n    public void Worst_Case_NonComparisonSort() {\n        long start = System.nanoTime();\n        sortArray8.Non_Comparison_Sort(false);\n        long end = System.nanoTime();\n        long duration = (end - start);\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration + \") ns\\u001B[0m\");\n    }\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Junit.java b/src/Junit.java
+--- a/src/Junit.java	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/src/Junit.java	(date 1685312694797)
+@@ -18,23 +18,22 @@
+     SortArray sortArray9 = new SortArray("50k.txt");
+     SortArray sortArray10 = new SortArray("1M.txt");
+ 
+-
+     @Test
+     public void Time_Comparison_sort() {
+-//        long start1 = System.currentTimeMillis();
+-//        sortArray4.simpleSort(false);
+-//        long end1 = System.currentTimeMillis();
+-//        long duration1 = (end1 - start1);
++        long start1 = System.currentTimeMillis();
++        sortArray10.simpleSort(false);
++        long end1 = System.currentTimeMillis();
++        long duration1 = (end1 - start1);
+ 
+         long start2 = System.currentTimeMillis();
+         sortArray10.EfficientSort(false);
+         long end2 = System.currentTimeMillis();
+         long duration2 = (end2 - start2);
+ 
+-//        long start3 = System.currentTimeMillis();
+-//        sortArray4.Non_Comparison_Sort(false);
+-//        long end3 = System.currentTimeMillis();
+-//        long duration3 = (end3 - start3);
++        long start3 = System.currentTimeMillis();
++        sortArray10.Non_Comparison_Sort(false);
++        long end3 = System.currentTimeMillis();
++        long duration3 = (end3 - start3);
+ 
+         long start4 = System.currentTimeMillis();
+         sortArray10.heapSort(false);
+@@ -42,9 +41,9 @@
+         long duration4 = (end4 - start4);
+ 
+         System.out.println("Time to sort the array with:");
+-       // System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
++        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
+         System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
+-       // System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
++        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
+         System.out.println("\u001B[36m[Heap sort] = (" + duration4 + ") ms\u001B[0m");
+     }
+ 
+@@ -85,7 +84,7 @@
+     }
+ 
+     @Test
+-    public void Non_Comparison_sort() {
++    public void Test_Non_Comparison_sort() {
+         ArrayList<int[]> result = sortArray1.Non_Comparison_Sort(false);
+         int[] arr = sortArray1.getArr();
+         //sorting the array with built-in java sort
+@@ -96,7 +95,7 @@
+ 
+ 
+     @Test
+-    public void Time_Comparison_with_respect_to_CountingSort() { //2 words!
++    public void Time_Comparison_with_respect_to_CountingSort() {
+         long start1 = System.nanoTime();
+         sortArray8.simpleSort(false);
+         long end1 = System.nanoTime();
+Index: src/Heap.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.lang.reflect.Array;\nimport java.util.ArrayList;\nimport java.util.Arrays;\n\npublic class Heap {\n\n    private int[] arr;\n    private int size;\n\n    public int getSize() {\n        return size;\n    }\n    public int[] getArr() {\n        return arr;\n    }\n\n    public Heap(int[] initialArray) {\n        arr = Arrays.copyOf(initialArray,initialArray.length);\n        size = initialArray.length;\n        buildMaxHeap(arr);\n    }\n\n\n    public void swap(int i, int j) {\n        int temp = arr[i];\n        arr[i] =  arr[j];\n        arr[j] =  temp;\n    }\n\n    public void maxHeapify(int[] list, int n, int index) {\n        int left = 2 * index + 1;\n        int right = 2 * index + 2;\n        int max = index;\n\n        if (left < n && list[left] > list[max]) {\n            max = left;\n        }\n\n        if (right < n && list[right] > list[max]) {\n            max = right;\n        }\n\n        if (max != index) {\n            swap(index, max);\n            maxHeapify(list, n, max);\n        }\n    }\n\n    public void buildMaxHeap(int[] list) {\n        int n = list.length;\n        for (int i = n / 2 - 1; i >= 0; i--) {\n            maxHeapify(list, n, i);\n        }\n    }\n    \n\n    public void printArr() {\n        for (int i = 0; i < size; i++) {\n            System.out.print(arr[i] + \" \");\n        }\n        System.out.println();\n    }\n\n    public boolean isEmpty() {\n        return size == 0;\n    }\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Heap.java b/src/Heap.java
+--- a/src/Heap.java	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/src/Heap.java	(date 1685312248715)
+@@ -1,5 +1,3 @@
+-import java.lang.reflect.Array;
+-import java.util.ArrayList;
+ import java.util.Arrays;
+ 
+ public class Heap {
+@@ -10,12 +8,13 @@
+     public int getSize() {
+         return size;
+     }
++
+     public int[] getArr() {
+         return arr;
+     }
+ 
+     public Heap(int[] initialArray) {
+-        arr = Arrays.copyOf(initialArray,initialArray.length);
++        arr = Arrays.copyOf(initialArray, initialArray.length);
+         size = initialArray.length;
+         buildMaxHeap(arr);
+     }
+@@ -23,8 +22,8 @@
+ 
+     public void swap(int i, int j) {
+         int temp = arr[i];
+-        arr[i] =  arr[j];
+-        arr[j] =  temp;
++        arr[i] = arr[j];
++        arr[j] = temp;
+     }
+ 
+     public void maxHeapify(int[] list, int n, int index) {
+@@ -52,18 +51,4 @@
+             maxHeapify(list, n, i);
+         }
+     }
+-    
+-
+-    public void printArr() {
+-        for (int i = 0; i < size; i++) {
+-            System.out.print(arr[i] + " ");
+-        }
+-        System.out.println();
+-    }
+-
+-    public boolean isEmpty() {
+-        return size == 0;
+-    }
+-
+-
+ }
+\ No newline at end of file
+Index: src/CommandLine.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Objects;\nimport java.util.Scanner;\n\npublic class CommandLine {\n    Scanner scanner = new Scanner(System.in);\n    Boolean intermediateRes;\n    SortArray sortAlg;\n\n    public void UserInterface() {\n\n        while (true) {\n            InputFile();\n            while (true) {\n                int sort = InputAlgorithm();\n                if (sort == 5) {\n                    break;\n                }\n                while (true) {\n                    int resFormat = ResFormat();\n                    switch (resFormat) {\n                        case 1:\n                            intermediateRes = false;\n                            break;\n                        case 2:\n                            intermediateRes = true;\n                            break;\n                    }\n                    if (resFormat == 3) {\n                        break;\n                    }\n                    PrintRes(sort);\n                }\n            }\n        }\n    }\n\n    public void PrintRes(int sort) {\n        ArrayList<int []> result = new ArrayList<>();\n        switch (sort) {\n            case 1:\n                result = sortAlg.simpleSort(intermediateRes);\n                break;\n            case 2:\n                result = sortAlg.EfficientSort(intermediateRes);\n                break;\n            case 3:\n                result = sortAlg.Non_Comparison_Sort(intermediateRes);\n                break;\n             case 4:\n                 result = sortAlg.heapSort(intermediateRes);\n                 break;\n//                 ArrayList<ArrayList<Integer>> temp=sortAlg.heapSort(intermediateRes);\n//                 for(ArrayList<Integer> arr:temp)\n//                 {\n//                     result.add(arr.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray());\n//                 }\n//             break;\n        }\n        String msg = \"\\u001B[33mFinal Sorted Result :\\u001B[0m\";\n        if (intermediateRes) {\n            msg = \"\\u001B[33mIntermediate Results :\\u001B[0m\";\n        }\n        System.out.println(msg);\n        for (int i = 0; i < result.size(); i++) {\n            System.out.println(\"\\u001B[34m\"+Arrays.toString(result.get(i))+\"\\u001B[0m\");\n        }\n        System.out.println();\n\n    }\n\n    public int ResFormat() {\n        System.out.println(\"\\u001B[33mCHOOSE RESULT FORMAT :\\u001B[0m\");\n        System.out.println(\"1.Final Sorted Results\");\n        System.out.println(\"2.Intermediate Results\");\n        System.out.println(\"3.Return To Sorting Algorithms Menu\");\n        String option = scanner.nextLine();\n        while (!(option.equals(\"1\") || option.equals(\"2\") || option.equals(\"3\"))) {\n            System.out.println(\"\\u001B[31mINVALID INPUT\\u001B[0m\");\n            option = scanner.nextLine();\n        }\n        System.out.println(\"\");\n        return Integer.valueOf(option);\n\n\n    }\n\n\n    public void InputFile() {\n        System.out.println(\"\\u001B[33mEnter the input file path: \\u001B[0m\");\n\n        String path = scanner.nextLine();\n\n        sortAlg = new SortArray(path);\n        while (sortAlg.file_path_error) {\n            System.out.println(\"\\u001B[31mERROR opening the file\\u001B[0m\");\n            System.out.println(\"\\u001B[33mEnter the input file path: \\u001B[0m\");\n            path = scanner.nextLine();\n            sortAlg = new SortArray(path);\n        }\n\n        System.out.println(\"\\u001B[32mFile successfully read ✅\\u001B[0m\");\n        System.out.println();\n\n\n    }\n\n    public int InputAlgorithm() {\n        System.out.println(\"\\u001B[33mCHOOSE A SORTING ALGORITHM :\\u001B[0m\");\n        System.out.println(\"1.Simple Sort\");\n        System.out.println(\"2.Efficient Sort\");\n        System.out.println(\"3.Non-Comparison Sort\");\n        System.out.println(\"4.Heap Sort\");\n        System.out.println(\"5.Return To Previous Menu\");\n        String option = scanner.nextLine();\n        while (!(option.equals(\"1\") || option.equals(\"2\") || option.equals(\"3\") || option.equals(\"4\") || option.equals(\"5\"))) {\n            System.out.println(\"\\u001B[31mINVALID INPUT\\u001B[0m\");\n            option = scanner.nextLine();\n        }\n        System.out.println();\n        return Integer.valueOf(option);\n\n\n    }\n\n\n    public boolean isValidInput(String input) {\n        try {\n            Integer.valueOf(input);\n            return true;\n        } catch (Exception e) {\n            return false;\n        }\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/CommandLine.java b/src/CommandLine.java
+--- a/src/CommandLine.java	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/src/CommandLine.java	(date 1685312006623)
+@@ -51,12 +51,6 @@
+              case 4:
+                  result = sortAlg.heapSort(intermediateRes);
+                  break;
+-//                 ArrayList<ArrayList<Integer>> temp=sortAlg.heapSort(intermediateRes);
+-//                 for(ArrayList<Integer> arr:temp)
+-//                 {
+-//                     result.add(arr.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray());
+-//                 }
+-//             break;
+         }
+         String msg = "\u001B[33mFinal Sorted Result :\u001B[0m";
+         if (intermediateRes) {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"91a22561-522d-4f63-932b-cf635bbb3eed\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/1M.txt\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/PriorityQueue.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/CommandLine.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/CommandLine.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Heap.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Heap.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Junit.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Junit.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/SortArray.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/SortArray.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CodeStyleSettingsInfer\">\n    <option name=\"done\" value=\"true\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectCodeStyleSettingsMigration\">\n    <option name=\"version\" value=\"2\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2QFfZYoVAwGUk1GqIveeO5a5ROC\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"git-widget-placeholder\": \"master\",\n    \"last_opened_file_path\": \"/home/youssef/IdeaProjects/Java_Dictionary-Hashing\"\n  }\n}]]></component>\n  <component name=\"RunManager\" selected=\"JUnit.Junit.Test_Heap_sort\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <module name=\"Heap and Sorting project\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Junit.Test_Heap_sort\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Heap and Sorting project\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"Junit\" />\n      <option name=\"METHOD_NAME\" value=\"Test_Heap_sort\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <list>\n      <item itemvalue=\"Application.Main\" />\n      <item itemvalue=\"JUnit.Junit.Test_Heap_sort\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"JUnit.Junit.Test_Heap_sort\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"91a22561-522d-4f63-932b-cf635bbb3eed\" name=\"Changes\" comment=\"\" />\n      <created>1684954307625</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1684954307625</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"empty\">\n      <created>1684954560328</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684954560328</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"SortArray class\">\n      <created>1684956508389</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684956508389</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"SortArray class done\">\n      <created>1684978048848</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684978048848</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"UI colors\">\n      <created>1685236499351</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685236499351</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Intermediate Solved ✅\">\n      <created>1685250784966</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685250784966</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"solve junit issue\">\n      <created>1685251302865</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685251302865</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"heap sort test\">\n      <created>1685280394728</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685280394728</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"optimization\">\n      <created>1685287075866</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685287075866</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"9\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"empty\" />\n    <MESSAGE value=\"SortArray class\" />\n    <MESSAGE value=\"SortArray class done\" />\n    <MESSAGE value=\"UI colors\" />\n    <MESSAGE value=\"Intermediate Solved ✅\" />\n    <MESSAGE value=\"solve junit issue\" />\n    <MESSAGE value=\"heap sort test\" />\n    <MESSAGE value=\"optimization\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"optimization\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e6961fe962b8ad4e62829d9bb1606284bb3ac372)
++++ b/.idea/workspace.xml	(date 1685312322479)
+@@ -4,15 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/1M.txt" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/PriorityQueue.java" afterDir="false" />
++    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="PriorityQueue">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/CommandLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandLine.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heap.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Junit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Junit.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/PriorityQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PriorityQueue.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/SortArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortArray.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -58,11 +55,11 @@
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "master",
++    "git-widget-placeholder": "Optimized",
+     "last_opened_file_path": "/home/youssef/IdeaProjects/Java_Dictionary-Hashing"
+   }
+ }]]></component>
+-  <component name="RunManager" selected="JUnit.Junit.Test_Heap_sort">
++  <component name="RunManager">
+     <configuration name="Main" type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="Heap and Sorting project" />
+@@ -155,7 +152,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1685287075866</updated>
+     </task>
+-    <option name="localTasksCounter" value="9" />
++    <task id="LOCAL-00009" summary="PriorityQueue">
++      <created>1685307707864</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1685307707864</updated>
++    </task>
++    <option name="localTasksCounter" value="10" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -179,6 +183,7 @@
+     <MESSAGE value="solve junit issue" />
+     <MESSAGE value="heap sort test" />
+     <MESSAGE value="optimization" />
+-    <option name="LAST_COMMIT_MESSAGE" value="optimization" />
++    <MESSAGE value="PriorityQueue" />
++    <option name="LAST_COMMIT_MESSAGE" value="PriorityQueue" />
+   </component>
+ </project>
+\ No newline at end of file

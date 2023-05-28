@@ -21,26 +21,26 @@ public class Junit {
     @Test
     public void Time_Comparison_sort() {
         long start1 = System.currentTimeMillis();
-        sortArray10.simpleSort(false);
+        sortArray3.simpleSort(false);
         long end1 = System.currentTimeMillis();
         long duration1 = (end1 - start1);
 
         long start2 = System.currentTimeMillis();
-        sortArray10.EfficientSort(false);
+        sortArray3.EfficientSort(false);
         long end2 = System.currentTimeMillis();
         long duration2 = (end2 - start2);
 
         long start3 = System.currentTimeMillis();
-        sortArray10.Non_Comparison_Sort(false);
+        sortArray3.Non_Comparison_Sort(false);
         long end3 = System.currentTimeMillis();
         long duration3 = (end3 - start3);
 
         long start4 = System.currentTimeMillis();
-        sortArray10.heapSort(false);
+        sortArray3.heapSort(false);
         long end4 = System.currentTimeMillis();
         long duration4 = (end4 - start4);
 
-        System.out.println("Time to sort the array with:");
+        System.out.println("Time to sort the array with 10k :");
         System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
         System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
         System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
@@ -62,12 +62,16 @@ public class Junit {
 
     @Test
     public void Test_Heap_sort() {
-        ArrayList<int[]> result = sortArray1.heapSort(false);
-        int[] arr = sortArray1.getArr();
+        ArrayList<int[]> result = sortArray6.heapSort(false);
+        ArrayList<int[]> steps = sortArray6.heapSort(true);
+        int[] arr = sortArray6.getArr();
         //sorting the array with built-in java sort
         Arrays.sort(arr);
         System.out.println(Arrays.toString(arr));
         System.out.println(Arrays.toString(result.get(0)));
+        for (int i = 0; i < steps.size(); i++) {
+            System.out.println("\u001B[34m"+Arrays.toString(steps.get(i))+"\u001B[0m");
+        }
         boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
         assertTrue(isEquals);
     }

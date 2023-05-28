@@ -1,0 +1,42 @@
+Index: src/Junit.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.junit.Test;\n\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\n\nimport static org.junit.Assert.assertTrue;\n\npublic class Junit {\n    SortArray sortArray1 = new SortArray(\"100.txt\");\n    SortArray sortArray2 = new SortArray(\"1k.txt\");\n    SortArray sortArray3 = new SortArray(\"10k.txt\");\n    SortArray sortArray4 = new SortArray(\"100k.txt\");\n    SortArray sortArray5 = new SortArray(\"bestCounting.txt\");\n    SortArray sortArray6 = new SortArray(\"test1.txt\");\n    SortArray sortArray7 = new SortArray(\"Counting.txt\");\n    SortArray sortArray8 = new SortArray(\"2.txt\");\n    SortArray sortArray9 = new SortArray(\"50k.txt\");\n    SortArray sortArray10 = new SortArray(\"1M.txt\");\n\n    @Test\n    public void Time_Comparison_sort() {\n        long start1 = System.currentTimeMillis();\n        sortArray10.simpleSort(false);\n        long end1 = System.currentTimeMillis();\n        long duration1 = (end1 - start1);\n\n        long start2 = System.currentTimeMillis();\n        sortArray10.EfficientSort(false);\n        long end2 = System.currentTimeMillis();\n        long duration2 = (end2 - start2);\n\n        long start3 = System.currentTimeMillis();\n        sortArray10.Non_Comparison_Sort(false);\n        long end3 = System.currentTimeMillis();\n        long duration3 = (end3 - start3);\n\n        long start4 = System.currentTimeMillis();\n        sortArray10.heapSort(false);\n        long end4 = System.currentTimeMillis();\n        long duration4 = (end4 - start4);\n\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[35m[Simple Sort] = (\" + duration1 + \") ms\\u001B[0m\");\n        System.out.println(\"\\u001B[34m[Efficient Sort] = (\" + duration2 + \") ms\\u001B[0m\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration3 + \") ms\\u001B[0m\");\n        System.out.println(\"\\u001B[36m[Heap sort] = (\" + duration4 + \") ms\\u001B[0m\");\n    }\n\n\n    @Test\n    public void Test_Simple_sort() {\n        ArrayList<int[]> result = sortArray1.simpleSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        System.out.println(Arrays.toString(result.get(0)));\n        boolean isEqual = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEqual);\n    }\n\n    @Test\n    public void Test_Heap_sort() {\n        ArrayList<int[]> result = sortArray1.heapSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        System.out.println(Arrays.toString(result.get(0)));\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n\n    @Test\n    public void Test_Efficient_sort() {\n        ArrayList<int[]> result = sortArray1.EfficientSort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n    @Test\n    public void Test_Non_Comparison_sort() {\n        ArrayList<int[]> result = sortArray1.Non_Comparison_Sort(false);\n        int[] arr = sortArray1.getArr();\n        //sorting the array with built-in java sort\n        Arrays.sort(arr);\n        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));\n        assertTrue(isEquals);\n    }\n\n\n    @Test\n    public void Time_Comparison_with_respect_to_CountingSort() {\n        long start1 = System.nanoTime();\n        sortArray8.simpleSort(false);\n        long end1 = System.nanoTime();\n        long duration1 = (end1 - start1);\n\n        long start2 = System.nanoTime();\n        sortArray8.EfficientSort(false);\n        long end2 = System.nanoTime();\n        long duration2 = (end2 - start2);\n\n        long start3 = System.nanoTime();\n        sortArray8.Non_Comparison_Sort(false);\n        long end3 = System.nanoTime();\n        long duration3 = (end3 - start3);\n\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[35m[Simple Sort] = (\" + duration1 + \") ns\\u001B[0m\");\n        System.out.println(\"\\u001B[34m[Efficient Sort] = (\" + duration2 + \") ns\\u001B[0m\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration3 + \") ns\\u001B[0m\");\n    }\n\n    @Test\n    public void Best_Case_NonComparisonSort() {\n        long start = System.nanoTime();\n        sortArray5.Non_Comparison_Sort(false);\n        long end = System.nanoTime();\n        long duration = (end - start);\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration + \") ns\\u001B[0m\");\n    }\n\n    @Test\n    public void Worst_Case_NonComparisonSort() {\n        long start = System.nanoTime();\n        sortArray8.Non_Comparison_Sort(false);\n        long end = System.nanoTime();\n        long duration = (end - start);\n        System.out.println(\"Time to sort the array with:\");\n        System.out.println(\"\\u001B[33m[Non Comparison Sort] = (\" + duration + \") ns\\u001B[0m\");\n    }\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Junit.java b/src/Junit.java
+--- a/src/Junit.java	
++++ b/src/Junit.java	
+@@ -21,26 +21,26 @@
+     @Test
+     public void Time_Comparison_sort() {
+         long start1 = System.currentTimeMillis();
+-        sortArray10.simpleSort(false);
++        sortArray4.simpleSort(false);
+         long end1 = System.currentTimeMillis();
+         long duration1 = (end1 - start1);
+ 
+         long start2 = System.currentTimeMillis();
+-        sortArray10.EfficientSort(false);
++        sortArray4.EfficientSort(false);
+         long end2 = System.currentTimeMillis();
+         long duration2 = (end2 - start2);
+ 
+         long start3 = System.currentTimeMillis();
+-        sortArray10.Non_Comparison_Sort(false);
++        sortArray4.Non_Comparison_Sort(false);
+         long end3 = System.currentTimeMillis();
+         long duration3 = (end3 - start3);
+ 
+         long start4 = System.currentTimeMillis();
+-        sortArray10.heapSort(false);
++        sortArray4.heapSort(false);
+         long end4 = System.currentTimeMillis();
+         long duration4 = (end4 - start4);
+ 
+-        System.out.println("Time to sort the array with:");
++        System.out.println("Time to sort the array with 100k:");
+         System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
+         System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
+         System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
