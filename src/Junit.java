@@ -16,27 +16,27 @@ public class Junit {
     SortArray sortArray7 = new SortArray("Counting.txt");
     SortArray sortArray8 = new SortArray("2.txt");
     SortArray sortArray9 = new SortArray("50k.txt");
-
+    SortArray sortArray10 = new SortArray("1M.txt");
 
     @Test
-    public void Time_Comparison_sort() { //100,000 words
+    public void Time_Comparison_sort() {
         long start1 = System.currentTimeMillis();
-        sortArray9.simpleSort(false);
+        sortArray10.simpleSort(false);
         long end1 = System.currentTimeMillis();
         long duration1 = (end1 - start1);
 
         long start2 = System.currentTimeMillis();
-        sortArray9.EfficientSort(false);
+        sortArray10.EfficientSort(false);
         long end2 = System.currentTimeMillis();
         long duration2 = (end2 - start2);
 
         long start3 = System.currentTimeMillis();
-        sortArray9.Non_Comparison_Sort(false);
+        sortArray10.Non_Comparison_Sort(false);
         long end3 = System.currentTimeMillis();
         long duration3 = (end3 - start3);
 
         long start4 = System.currentTimeMillis();
-        sortArray9.heapSort(false);
+        sortArray10.heapSort(false);
         long end4 = System.currentTimeMillis();
         long duration4 = (end4 - start4);
 
@@ -62,11 +62,13 @@ public class Junit {
 
     @Test
     public void Test_Heap_sort() {
-        ArrayList<ArrayList<Integer>> result = sortArray1.heapSort(false);
-        ArrayList<Integer> arr = sortArray1.convert(sortArray1.getArr());
+        ArrayList<int[]> result = sortArray1.heapSort(false);
+        int[] arr = sortArray1.getArr();
         //sorting the array with built-in java sort
-        Collections.sort(arr);
-        boolean isEquals = arr.equals(result.get(0));
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(result.get(0)));
+        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
         assertTrue(isEquals);
     }
 
@@ -82,7 +84,7 @@ public class Junit {
     }
 
     @Test
-    public void Non_Comparison_sort() {
+    public void Test_Non_Comparison_sort() {
         ArrayList<int[]> result = sortArray1.Non_Comparison_Sort(false);
         int[] arr = sortArray1.getArr();
         //sorting the array with built-in java sort
@@ -93,7 +95,7 @@ public class Junit {
 
 
     @Test
-    public void Time_Comparison_with_respect_to_CountingSort() { //2 words!
+    public void Time_Comparison_with_respect_to_CountingSort() {
         long start1 = System.nanoTime();
         sortArray8.simpleSort(false);
         long end1 = System.nanoTime();
