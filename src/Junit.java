@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,6 +15,37 @@ public class Junit {
     SortArray sortArray6 = new SortArray("test1.txt");
     SortArray sortArray7 = new SortArray("Counting.txt");
     SortArray sortArray8 = new SortArray("2.txt");
+
+
+    @Test
+    public void Time_Comparison_sort() { //100,000 words
+        long start1 = System.currentTimeMillis();
+        sortArray4.simpleSort(false);
+        long end1 = System.currentTimeMillis();
+        long duration1 = (end1 - start1);
+
+        long start2 = System.currentTimeMillis();
+        sortArray4.EfficientSort(false);
+        long end2 = System.currentTimeMillis();
+        long duration2 = (end2 - start2);
+
+        long start3 = System.currentTimeMillis();
+        sortArray4.Non_Comparison_Sort(false);
+        long end3 = System.currentTimeMillis();
+        long duration3 = (end3 - start3);
+
+        long start4 = System.currentTimeMillis();
+        sortArray4.heapSort(false);
+        long end4 = System.currentTimeMillis();
+        long duration4 = (end4 - start4);
+
+        System.out.println("Time to sort the array with:");
+        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
+        System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
+        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
+        System.out.println("\u001B[36m[Heap sort] = (" + duration4 + ") ms\u001B[0m");
+    }
+
 
     @Test
     public void Test_Simple_sort() {
@@ -28,13 +60,24 @@ public class Junit {
     }
 
     @Test
+    public void Test_Heap_sort() {
+        ArrayList<ArrayList<Integer>> result = sortArray1.heapSort(false);
+        ArrayList<Integer> arr = sortArray1.convert(sortArray1.getArr());
+        //sorting the array with built-in java sort
+        Collections.sort(arr);
+        boolean isEquals = arr.equals(result.get(0));
+        assertTrue(isEquals);
+    }
+
+
+    @Test
     public void Test_Efficient_sort() {
         ArrayList<int[]> result = sortArray1.EfficientSort(false);
         int[] arr = sortArray1.getArr();
         //sorting the array with built-in java sort
         Arrays.sort(arr);
-        boolean equals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
-        assertTrue(equals);
+        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
+        assertTrue(isEquals);
     }
 
     @Test
@@ -43,38 +86,10 @@ public class Junit {
         int[] arr = sortArray1.getArr();
         //sorting the array with built-in java sort
         Arrays.sort(arr);
-        boolean equals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
-        assertTrue(equals);
+        boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
+        assertTrue(isEquals);
     }
 
-    @Test
-    public void Time_Comparison_sort() { //100,000 words
-        long start1 = System.currentTimeMillis();
-        sortArray2.simpleSort(false);
-        long end1 = System.currentTimeMillis();
-        long duration1 = (end1 - start1);
-
-        long start2 = System.currentTimeMillis();
-        sortArray2.EfficientSort(false);
-        long end2 = System.currentTimeMillis();
-        long duration2 = (end2 - start2);
-
-        long start3 = System.currentTimeMillis();
-        sortArray2.Non_Comparison_Sort(false);
-        long end3 = System.currentTimeMillis();
-        long duration3 = (end3 - start3);
-
-        long start4 = System.currentTimeMillis();
-        sortArray2.heapSort(false);
-        long end4 = System.currentTimeMillis();
-        long duration4 = (end4 - start4);
-
-        System.out.println("Time to sort the array with:");
-        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ms\u001B[0m");
-        System.out.println("\u001B[34m[Efficient Sort] = (" + duration2 + ") ms\u001B[0m");
-        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration3 + ") ms\u001B[0m");
-        System.out.println("\u001B[36m[Heap sort] = (" + duration4 + ") ms\u001B[0m");
-    }
 
     @Test
     public void Time_Comparison_with_respect_to_CountingSort() { //2 words!

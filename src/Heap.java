@@ -106,6 +106,10 @@ public class Heap {
         }
     }
 
+    public void append(int index, int value){
+        arr.set(index,value);
+    }
+
     public void printArr() {
         for (int i = 0; i < size; i++) {
             System.out.print(arr.get(i) + " ");

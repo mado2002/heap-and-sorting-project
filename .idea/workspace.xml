@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="Intermediate Solved ✅">
+    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Junit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Junit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685250784966</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="solve junit issue">
+      <created>1685251302865</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685251302865</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -111,6 +120,7 @@
     <MESSAGE value="SortArray class done" />
     <MESSAGE value="UI colors" />
     <MESSAGE value="Intermediate Solved ✅" />
-    <option name="LAST_COMMIT_MESSAGE" value="Intermediate Solved ✅" />
+    <MESSAGE value="solve junit issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="solve junit issue" />
   </component>
 </project>
