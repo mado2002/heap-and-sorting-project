@@ -348,10 +348,10 @@ public class Junit {
 
         for (int i = 0; i < 1; i++) {
             sortArray = new SortArray(str);
-            start1 = System.nanoTime();
-            sortArray.simpleSort(false);
-            end1 = System.nanoTime();
-            duration1 = (end1 - start1);
+//            start1 = System.nanoTime();
+//            sortArray.simpleSort(false);
+//            end1 = System.nanoTime();
+//            duration1 = (end1 - start1);
             start2 = System.nanoTime();
             sortArray.EfficientSort(false);
             end2 = System.nanoTime();
@@ -364,7 +364,7 @@ public class Junit {
             sortArray.heapSort(false);
             end4 = System.nanoTime();
             duration4 = (end4 - start4);
-            simpleSort.add(duration1);
+         //   simpleSort.add(duration1);
             efficientSort.add(duration2);
             nonComparisonSort.add(duration3);
             heapSort.add(duration4);
@@ -374,13 +374,13 @@ public class Junit {
         Long nonComparisonSortAverage = 0L;
         Long heapSortAverage = 0L;
         for (int i = 0; i < 1; i++) {
-            simpleSortAverage += simpleSort.get(i);
+         //   simpleSortAverage += simpleSort.get(i);
             efficientSortAverage += efficientSort.get(i);
             nonComparisonSortAverage += nonComparisonSort.get(i);
             heapSortAverage += heapSort.get(i);
         }
         System.out.println("Average time to sort the array with file size==>" + str);
-        System.out.println("\u001B[35m[Simple Sort] = (" + simpleSortAverage + ") ns\u001B[0m");
+       // System.out.println("\u001B[35m[Simple Sort] = (" + simpleSortAverage + ") ns\u001B[0m");
         System.out.println("\u001B[34m[Efficient Sort] = (" + efficientSortAverage + ") ns\u001B[0m");
         System.out.println("\u001B[33m[Non Comparison Sort] = (" + nonComparisonSortAverage + ") ns\u001B[0m");
         System.out.println("\u001B[36m[Heap sort] = (" + heapSortAverage + ") ns\u001B[0m");

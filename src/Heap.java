@@ -45,10 +45,39 @@ public class Heap {
         }
     }
 
-    public void buildMaxHeap(int[] list) {
+    private void buildMaxHeap(int[] list) {
         int n = list.length;
         for (int i = n / 2 - 1; i >= 0; i--) {
             maxHeapify(list, n, i);
         }
+    }
+    public void insert(int value) {
+        arr = Arrays.copyOf(arr, size + 1);
+        arr[size] = value;
+        heapifyUp(size);
+        size++;
+    }
+
+    private void heapifyUp(int size) {
+        int parent = (size - 1) / 2;
+        if (arr[parent] < arr[size]) {
+            swap(parent, size);
+            heapifyUp(parent);
+        }
+    }
+    public int extract() {
+        int max = arr[0];
+        arr[0] = arr[size - 1];
+        size--;
+        arr = Arrays.copyOf(arr, size);
+        maxHeapify(arr, size, 0);
+        return max;
+    }
+
+    public void printArr() {
+        for (int j : arr) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
     }
 }
