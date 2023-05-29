@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.junit.Assert.assertTrue;
 
@@ -17,6 +16,10 @@ public class Junit {
     SortArray sortArray8 = new SortArray("2.txt");
     SortArray sortArray9 = new SortArray("50k.txt");
     SortArray sortArray10 = new SortArray("1M.txt");
+//    SortArray sortArray11 = new SortArray("empty.txt");
+//    SortArray sortArray12 = new SortArray("sameValue.txt");
+//    SortArray sortArray13 = new SortArray("reverse.txt");
+//    SortArray sortArray14 = new SortArray("sorted.txt");
 
     @Test
     public void Time_Comparison_sort() {
@@ -70,7 +73,7 @@ public class Junit {
         System.out.println(Arrays.toString(arr));
         System.out.println(Arrays.toString(result.get(0)));
         for (int i = 0; i < steps.size(); i++) {
-            System.out.println("\u001B[34m"+Arrays.toString(steps.get(i))+"\u001B[0m");
+            System.out.println("\u001B[34m" + Arrays.toString(steps.get(i)) + "\u001B[0m");
         }
         boolean isEquals = (Arrays.toString(result.get(0)).equals(Arrays.toString(arr)));
         assertTrue(isEquals);
@@ -140,6 +143,127 @@ public class Junit {
         System.out.println("Time to sort the array with:");
         System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration + ") ns\u001B[0m");
     }
+
+
+//---------------------------------------------------------------------------------------------------
+//    @Test
+//    public void emplty_file_case() {
+//
+//        long end1, start1 = System.currentTimeMillis();
+//        sortArray11.simpleSort(false);
+//        end1 = System.currentTimeMillis();
+//        end1 = (end1 - start1);
+//
+//        long end2, start2 = System.currentTimeMillis();
+//        sortArray11.EfficientSort(false);
+//        end2 = System.currentTimeMillis();
+//        end2 = (end2 - start2);
+//
+//        long end3, start3 = System.currentTimeMillis();
+//        sortArray11.Non_Comparison_Sort(false);
+//        end3 = System.currentTimeMillis();
+//        end3 = (end3 - start3);
+//
+//        long end4, start4 = System.currentTimeMillis();
+//        sortArray11.heapSort(false);
+//        end4 = System.currentTimeMillis();
+//        end4 = (end4 - start4);
+//
+//        System.out.println("Time to sort the array with :");
+//        System.out.println("\u001B[35m[Simple Sort] = (" + end1 + ") ms\u001B[0m");
+//        System.out.println("\u001B[34m[Efficient Sort] = (" + end2 + ") ms\u001B[0m");
+//        System.out.println("\u001B[33m[Non Comparison Sort] = (" + end3 + ") ms\u001B[0m");
+//        System.out.println("\u001B[36m[Heap sort] = (" + end4 + ") ms\u001B[0m");
+//
+//    }
+//
+//
+//    @Test
+//    public void same_file_case() {
+//
+//        long end1, start1 = System.currentTimeMillis();
+//        sortArray12.simpleSort(false);
+//        end1 = System.currentTimeMillis();
+//        end1 = (end1 - start1);
+//
+//        long end2, start2 = System.currentTimeMillis();
+//        sortArray12.EfficientSort(false);
+//        end2 = System.currentTimeMillis();
+//        end2 = (end2 - start2);
+//
+//        long end3, start3 = System.currentTimeMillis();
+//        sortArray12.Non_Comparison_Sort(false);
+//        end3 = System.currentTimeMillis();
+//        end3 = (end3 - start3);
+//
+//        long end4, start4 = System.currentTimeMillis();
+//        sortArray12.heapSort(false);
+//        end4 = System.currentTimeMillis();
+//        end4 = (end4 - start4);
+//
+//        System.out.println("Time to sort the array with :");
+//        System.out.println("\u001B[35m[Simple Sort] = (" + end1 + ") ms\u001B[0m");
+//        System.out.println("\u001B[34m[Efficient Sort] = (" + end2 + ") ms\u001B[0m");
+//        System.out.println("\u001B[33m[Non Comparison Sort] = (" + end3 + ") ms\u001B[0m");
+//        System.out.println("\u001B[36m[Heap sort] = (" + end4 + ") ms\u001B[0m");
+//
+//    }
+//
+//
+//    @Test
+//    public void worst_case_senario_of_heap_merge_and_bubble_() {
+//
+//        long end1, start1 = System.currentTimeMillis();
+//        sortArray13.simpleSort(false);
+//        end1 = System.currentTimeMillis();
+//        end1 = (end1 - start1);
+//
+//        long end2, start2 = System.currentTimeMillis();
+//        sortArray13.EfficientSort(false);
+//        end2 = System.currentTimeMillis();
+//        end2 = (end2 - start2);
+//
+//
+//        long end4, start4 = System.currentTimeMillis();
+//        sortArray13.heapSort(false);
+//        end4 = System.currentTimeMillis();
+//        end4 = (end4 - start4);
+//
+//        System.out.println("Time to sort the array with :");
+//        System.out.println("\u001B[35m[Simple Sort] = (" + end1 + ") ms\u001B[0m");
+//        System.out.println("\u001B[34m[Efficient Sort] = (" + end2 + ") ms\u001B[0m");
+//        System.out.println("\u001B[36m[Heap sort] = (" + end4 + ") ms\u001B[0m");
+//
+//    }
+//
+//
+//    @Test
+//    public void best_case_senario_of_heap_merge_and_bubble_() {
+//
+//        long end1, start1 = System.currentTimeMillis();
+//        sortArray14.simpleSort(false);
+//        end1 = System.currentTimeMillis();
+//        end1 = (end1 - start1);
+//
+//        long end2, start2 = System.currentTimeMillis();
+//        sortArray14.EfficientSort(false);
+//        end2 = System.currentTimeMillis();
+//        end2 = (end2 - start2);
+//
+//
+//        long end4, start4 = System.currentTimeMillis();
+//        sortArray14.heapSort(false);
+//        end4 = System.currentTimeMillis();
+//        end4 = (end4 - start4);
+//
+//
+//        System.out.println("Time to sort the array with :");
+//        System.out.println("\u001B[35m[Simple Sort] = (" + end1 + ") ms\u001B[0m");
+//        System.out.println("\u001B[34m[Efficient Sort] = (" + end2 + ") ms\u001B[0m");
+//        System.out.println("\u001B[36m[Heap sort] = (" + end4 + ") ms\u001B[0m");
+//
+//    }
+
 
 }
 
