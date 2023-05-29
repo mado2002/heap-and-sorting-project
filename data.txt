@@ -1,0 +1,30 @@
+Average time to sort the array with file size==>2.txt
+10116
+5022
+7387912
+67785
+Average time to sort the array with file size==>100.txt
+276477
+86087
+386728
+108090
+Average time to sort the array with file size==>1k.txt
+4030500
+435138
+642488
+486762
+Average time to sort the array with file size==>10k.txt
+179908804
+2507078
+2272893
+3408934
+Average time to sort the array with file size==>50k.txt
+6356710177
+12909519
+8156420
+14312773
+Average time to sort the array with file size==>100k.txt
+23985031322
+33138797
+9027472
+25696608

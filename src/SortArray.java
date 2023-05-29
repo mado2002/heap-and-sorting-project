@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SortArray {
     Heap heap;
@@ -17,26 +18,36 @@ public class SortArray {
 
     public SortArray(String path) {
         this.path = path;
-        read_from_file();
+        read_from_file(path);
     }
-
-    public void read_from_file() {
-        try {
-            FileReader fileReader = new FileReader(path);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            line = bufferedReader.readLine();
-            String[] strArray = line.split(",");
-            arr = new int[strArray.length];
-            for (int i = 0; i < strArray.length; i++) {
-                arr[i] = Integer.parseInt(strArray[i]);
-            }
-            bufferedReader.close();
-            file_path_error = false;
-        } catch (IOException e) {
-            file_path_error = true;
+    public SortArray(Integer[] arr) {
+        this.arr = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            this.arr[i] = arr[i];
         }
     }
+
+    private void read_from_file(String filePath) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader("testcases/"+filePath))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                String[] strArray = line.split(",");
+                for (int i = 0; i < strArray.length; i++) {
+                    arr.add(Integer.parseInt(strArray[i]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("\u001B[31mAn ERROR occurred opening file\u001B[0m ");
+        }
+        this.arr = new int[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            this.arr[i] = arr.get(i);
+        }
+
+    }
+
+
 
     public ArrayList<int[]> heapSort(boolean returnIntermediate) {
         heap = new Heap(arr);
@@ -156,6 +167,9 @@ public class SortArray {
         int min = Arrays.stream(arr).min().orElse(0);
         int max = Arrays.stream(arr).max().orElse(Integer.MAX_VALUE);
         int[] sortedArray = arr.clone();
+        if (max==Integer.MAX_VALUE) {
+            max = 1000000;// to avoid overflow in countArray (put it as your heap size )
+        }
         int[] countArray = new int[max - min + 1];
         for (int value : sortedArray) {
             countArray[value - min]++;
