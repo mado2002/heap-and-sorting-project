@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class Junit {
     SortArray sortArray1 = new SortArray("100.txt");
     SortArray sortArray2 = new SortArray("1k.txt");
-    SortArray sortArray3 = new SortArray("10k.txt");
+    SortArray sortArray3 = new SortArray("10k.txt");//average case
     SortArray sortArray4 = new SortArray("100k.txt");
     SortArray sortArray5 = new SortArray("bestCounting.txt");
     SortArray sortArray6 = new SortArray("test1.txt");
@@ -20,28 +20,29 @@ public class Junit {
     SortArray sortArray10 = new SortArray("1M.txt");
     SortArray sortArray11 = new SortArray("empty.txt");
     SortArray sortArray12 = new SortArray("sameValue.txt");
-    SortArray sortArray13 = new SortArray("reverse.txt");
-    SortArray sortArray14 = new SortArray("sorted.txt");
+    SortArray sortArray13 = new SortArray("reverse.txt");//worst case
+    SortArray sortArray14 = new SortArray("sorted.txt");//best case
 
+    //compare the time of all sorting algorithms for given array
     @Test
     public void Time_Comparison_sort() {
         long start1 = System.currentTimeMillis();
-        sortArray3.simpleSort(false);
+        sortArray1.simpleSort(false);
         long end1 = System.currentTimeMillis();
         long duration1 = (end1 - start1);
 
         long start2 = System.currentTimeMillis();
-        sortArray3.EfficientSort(false);
+        sortArray1.EfficientSort(false);
         long end2 = System.currentTimeMillis();
         long duration2 = (end2 - start2);
 
         long start3 = System.currentTimeMillis();
-        sortArray3.Non_Comparison_Sort(false);
+        sortArray1.Non_Comparison_Sort(false);
         long end3 = System.currentTimeMillis();
         long duration3 = (end3 - start3);
 
         long start4 = System.currentTimeMillis();
-        sortArray3.heapSort(false);
+        sortArray1.heapSort(false);
         long end4 = System.currentTimeMillis();
         long duration4 = (end4 - start4);
 
@@ -52,7 +53,7 @@ public class Junit {
         System.out.println("\u001B[36m[Heap sort] = (" + duration4 + ") ms\u001B[0m");
     }
 
-
+    //test the logic of all sorting algorithms
     @Test
     public void Test_Simple_sort() {
         ArrayList<int[]> result = sortArray1.simpleSort(false);
@@ -334,64 +335,272 @@ public class Junit {
 
     @Test
     public void exportTimesToBePlotted() throws IOException {
-        String str = new String("1M.txt");
-        FileWriter fileWriter = new FileWriter("data.txt", true);
-        SortArray sortArray;
-        Long start1, end1, duration1;
-        Long start2, end2, duration2;
-        Long start3, end3, duration3;
-        Long start4, end4, duration4;
-        ArrayList<Long> simpleSort = new ArrayList<>();
-        ArrayList<Long> efficientSort = new ArrayList<>();
-        ArrayList<Long> nonComparisonSort = new ArrayList<>();
-        ArrayList<Long> heapSort = new ArrayList<>();
+        String[] fileNames = {"100.txt"};
+        for (String fileName : fileNames) {
+            String str = fileName;
+            FileWriter fileWriter = new FileWriter("data.txt", true);
+            SortArray sortArray;
+            long start1, end1, duration1;
+            long start2, end2, duration2;
+            long start3, end3, duration3;
+            long start4, end4, duration4;
+            ArrayList<Long> simpleSort = new ArrayList<>();
+            ArrayList<Long> efficientSort = new ArrayList<>();
+            ArrayList<Long> nonComparisonSort = new ArrayList<>();
+            ArrayList<Long> heapSort = new ArrayList<>();
 
-        for (int i = 0; i < 1; i++) {
-            sortArray = new SortArray(str);
-            start1 = System.nanoTime();
-            sortArray.simpleSort(false);
-            end1 = System.nanoTime();
-            duration1 = (end1 - start1);
-            start2 = System.nanoTime();
-            sortArray.EfficientSort(false);
-            end2 = System.nanoTime();
-            duration2 = (end2 - start2);
-            start3 = System.nanoTime();
-            sortArray.Non_Comparison_Sort(false);
-            end3 = System.nanoTime();
-            duration3 = (end3 - start3);
-            start4 = System.nanoTime();
-            sortArray.heapSort(false);
-            end4 = System.nanoTime();
-            duration4 = (end4 - start4);
-            simpleSort.add(duration1);
-            efficientSort.add(duration2);
-            nonComparisonSort.add(duration3);
-            heapSort.add(duration4);
+            for (int i = 0; i < 5; i++) {
+                sortArray = new SortArray(str);
+                start1 = System.nanoTime();
+                sortArray.simpleSort(false);
+                end1 = System.nanoTime();
+                duration1 = (end1 - start1);
+                start2 = System.nanoTime();
+                sortArray.EfficientSort(false);
+                end2 = System.nanoTime();
+                duration2 = (end2 - start2);
+                start3 = System.nanoTime();
+                sortArray.Non_Comparison_Sort(false);
+                end3 = System.nanoTime();
+                duration3 = (end3 - start3);
+                start4 = System.nanoTime();
+                sortArray.heapSort(false);
+                end4 = System.nanoTime();
+                duration4 = (end4 - start4);
+                simpleSort.add(duration1);
+                efficientSort.add(duration2);
+                nonComparisonSort.add(duration3);
+                heapSort.add(duration4);
+            }
+            Long simpleSortAverage = 0L;
+            Long efficientSortAverage = 0L;
+            Long nonComparisonSortAverage = 0L;
+            Long heapSortAverage = 0L;
+            for (int i = 0; i < 5; i++) {
+                simpleSortAverage += simpleSort.get(i);
+                efficientSortAverage += efficientSort.get(i);
+                nonComparisonSortAverage += nonComparisonSort.get(i);
+                heapSortAverage += heapSort.get(i);
+            }
+            simpleSortAverage /= 5000;
+            efficientSortAverage /= 5000;
+            nonComparisonSortAverage /= 5000;
+            heapSortAverage /= 5000;
+            System.out.println("Average time to sort the array with file size==>" + str);
+            System.out.println("\u001B[35m[Simple Sort] = (" + simpleSortAverage + ") ns\u001B[0m");
+            System.out.println("\u001B[34m[Efficient Sort] = (" + efficientSortAverage + ") ns\u001B[0m");
+            System.out.println("\u001B[33m[Non Comparison Sort] = (" + nonComparisonSortAverage + ") ns\u001B[0m");
+            System.out.println("\u001B[36m[Heap sort] = (" + heapSortAverage + ") ns\u001B[0m");
+            fileWriter.write("Average time to sort the array with file size==>" + str + "\n");
+            fileWriter.write(simpleSortAverage + "\n");
+            fileWriter.write(efficientSortAverage + "\n");
+            fileWriter.write(nonComparisonSortAverage + "\n");
+            fileWriter.write(heapSortAverage + "\n");
+            fileWriter.close();
         }
-        Long simpleSortAverage = 0L;
-        Long efficientSortAverage = 0L;
-        Long nonComparisonSortAverage = 0L;
-        Long heapSortAverage = 0L;
-        for (int i = 0; i < 1; i++) {
-            simpleSortAverage += simpleSort.get(i);
-            efficientSortAverage += efficientSort.get(i);
-            nonComparisonSortAverage += nonComparisonSort.get(i);
-            heapSortAverage += heapSort.get(i);
+
+    }
+
+    //test time Complexity best case for all algorithms
+    @Test
+    public void testTimeComplexityBestCaseSimpleSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(i);
         }
-        System.out.println("Average time to sort the array with file size==>" + str);
-        System.out.println("\u001B[35m[Simple Sort] = (" + simpleSortAverage + ") ns\u001B[0m");
-        System.out.println("\u001B[34m[Efficient Sort] = (" + efficientSortAverage + ") ns\u001B[0m");
-        System.out.println("\u001B[33m[Non Comparison Sort] = (" + nonComparisonSortAverage + ") ns\u001B[0m");
-        System.out.println("\u001B[36m[Heap sort] = (" + heapSortAverage + ") ns\u001B[0m");
-        fileWriter.write("Average time to sort the array with file size==>" + str + "\n");
-        fileWriter.write(simpleSortAverage + "\n");
-        fileWriter.write(efficientSortAverage + "\n");
-        fileWriter.write(nonComparisonSortAverage + "\n");
-        fileWriter.write(heapSortAverage + "\n");
-        fileWriter.close();
+        Collections.shuffle(list);
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.simpleSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i);
+        }
+    }
+    @Test
+    public void testTimeComplexityBestCaseEfficientSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.EfficientSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[34m[Efficient Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i);
+        }
+    }
+    @Test
+    public void testTimeComplexityBestCaseNonComparisonSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.Non_Comparison_Sort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i);
+        }
+    }
+    @Test
+    public void testTimeComplexityBestCaseHeapSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.heapSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[36m[Heap sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i);
+        }
+    }
 
+    //test time Complexity worst case for all algorithms
+    @Test
+    public void testTimeComplexityWorstCaseSimpleSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 100000; i > 0; i--) {
+            list.add(i);
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.simpleSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i + 1);
+        }
+    }
+    @Test
+    public void testTimeComplexityWorstCaseEfficientSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 100000; i > 0; i--) {
+            list.add(i);
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.EfficientSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[34m[Efficient Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i + 1);
+        }
+    }
+    @Test
+    public void testTimeComplexityWorstCaseNonComparisonSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 100000; i > 0; i--) {
+            list.add(i);
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.Non_Comparison_Sort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i + 1);
+        }
+    }
+    @Test
+    public void testTimeComplexityWorstCaseHeapSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 100000; i > 0; i--) {
+            list.add(i);
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.heapSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[36m[Heap sort] = (" + duration1 + ") ns\u001B[0m");
+        for (int i = 0; i < 100000; i++) {
+            assertTrue(sortArray.result.get(0)[i] == i + 1);
+        }
+    }
 
+    //test time Complexity average case for all algorithms
+    @Test
+    public void testTimeComplexityAverageCaseSimpleSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add((int) (Math.random() * 100000));
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.simpleSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[35m[Simple Sort] = (" + duration1 + ") ns\u001B[0m");
+    }
+    @Test
+    public void testTimeComplexityAverageCaseEfficientSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add((int) (Math.random() * 100000));
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.EfficientSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[34m[Efficient Sort] = (" + duration1 + ") ns\u001B[0m");
+    }
+    @Test
+    public void testTimeComplexityAverageCaseNonComparisonSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add((int) (Math.random() * 100000));
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.Non_Comparison_Sort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[33m[Non Comparison Sort] = (" + duration1 + ") ns\u001B[0m");
+    }
+    @Test
+    public void testTimeComplexityAverageCaseHeapSort() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add((int) (Math.random() * 100000));
+        }
+        SortArray sortArray = new SortArray(list.toArray(new Integer[list.size()]));
+        Long start1 = System.currentTimeMillis();
+        sortArray.heapSort(false);
+        Long end1 = System.currentTimeMillis();
+        Long duration1 = (end1 - start1);
+        System.out.println("Time to sort the array with :");
+        System.out.println("\u001B[36m[Heap sort] = (" + duration1 + ") ns\u001B[0m");
     }
 
 
