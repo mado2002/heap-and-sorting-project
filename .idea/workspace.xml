@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="Intermediate steps fixes">
+    <list default="true" id="91a22561-522d-4f63-932b-cf635bbb3eed" name="Changes" comment="Update">
+      <change afterPath="$PROJECT_DIR$/testcases/sort1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testcases/sort2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/100.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/negative.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Heap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PriorityQueue.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test/Junit.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/Junit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testcases/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testcases/bestCounting.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/bestCounting.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testcases/reverse.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/reverse.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testcases/sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/sorted.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Junit">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Heap and Sorting project" />
@@ -95,40 +95,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Junit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Junit.Test_Efficient_sort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Heap and Sorting project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Junit" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Junit.bestCaseComparision" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Heap and Sorting project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Junit" />
-      <option name="METHOD_NAME" value="bestCaseComparision" />
+      <option name="METHOD_NAME" value="Test_Efficient_sort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Junit.exportTimesToBePlotted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Junit.Test_Heap_sort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Heap and Sorting project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Junit" />
-      <option name="METHOD_NAME" value="exportTimesToBePlotted" />
+      <option name="METHOD_NAME" value="Test_Heap_sort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Junit.heavyTestForAllAlgorithms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Junit.Test_Non_Comparison_sort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Heap and Sorting project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Junit" />
-      <option name="METHOD_NAME" value="heavyTestForAllAlgorithms" />
+      <option name="METHOD_NAME" value="Test_Non_Comparison_sort" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Junit.Test_Simple_sort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Heap and Sorting project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Junit" />
+      <option name="METHOD_NAME" value="Test_Simple_sort" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Junit.worst_case_heap_merge_bubble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Heap and Sorting project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Junit" />
+      <option name="METHOD_NAME" value="worst_case_heap_merge_bubble" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -136,17 +147,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.Junit" />
-      <item itemvalue="JUnit.Junit.bestCaseComparision" />
-      <item itemvalue="JUnit.Junit.exportTimesToBePlotted" />
-      <item itemvalue="JUnit.Junit.heavyTestForAllAlgorithms" />
+      <item itemvalue="JUnit.Junit.Test_Efficient_sort" />
+      <item itemvalue="JUnit.Junit.Test_Heap_sort" />
+      <item itemvalue="JUnit.Junit.Test_Non_Comparison_sort" />
+      <item itemvalue="JUnit.Junit.Test_Simple_sort" />
+      <item itemvalue="JUnit.Junit.worst_case_heap_merge_bubble" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Junit" />
-        <item itemvalue="JUnit.Junit.exportTimesToBePlotted" />
-        <item itemvalue="JUnit.Junit.heavyTestForAllAlgorithms" />
-        <item itemvalue="JUnit.Junit.bestCaseComparision" />
+        <item itemvalue="JUnit.Junit.Test_Non_Comparison_sort" />
+        <item itemvalue="JUnit.Junit.Test_Efficient_sort" />
+        <item itemvalue="JUnit.Junit.Test_Heap_sort" />
+        <item itemvalue="JUnit.Junit.Test_Simple_sort" />
+        <item itemvalue="JUnit.Junit.worst_case_heap_merge_bubble" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685316840592</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update">
+      <created>1685387462857</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1685387462857</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update">
+      <created>1685387476317</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685387476317</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +288,8 @@
     <MESSAGE value="optimization" />
     <MESSAGE value="PriorityQueue" />
     <MESSAGE value="Intermediate steps fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Intermediate steps fixes" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="com.vaadin.designer2.intellij.settings.SizePresetsSettingsComponent">
     <option name="sizePresets">
