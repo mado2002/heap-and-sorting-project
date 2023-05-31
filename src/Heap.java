@@ -65,15 +65,19 @@ public class Heap {
             heapifyUp(parent);
         }
     }
-    public int extractMax() {
-        if (size == 0) {
-            throw new IllegalStateException("Heap is empty");
-        }
+    public int extract() {
         int max = arr[0];
         arr[0] = arr[size - 1];
         size--;
         arr = Arrays.copyOf(arr, size);
         maxHeapify(arr, size, 0);
         return max;
+    }
+
+    public void printArr() {
+        for (int j : arr) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
     }
 }
